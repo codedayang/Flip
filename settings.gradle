@@ -1,0 +1,3 @@
+rootProject.name='Flip'
+include ':shared'
+include ':mobile'
