@@ -11,7 +11,7 @@ import java.util.*
 
 class TagFilter (
     override val id: String = UUID.randomUUID().toString(),
-    override val ruleId: String,
+    override val ruleId: String = "",
     private val tags: List<Tag>
 ) : Filter(id, ruleId) {
     override fun check(card: Card): Boolean {

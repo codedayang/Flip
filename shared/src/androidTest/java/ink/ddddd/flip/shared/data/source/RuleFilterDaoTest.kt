@@ -70,12 +70,13 @@ class RuleFilterDaoTest {
     @Test
     fun testRuleCheck() {
         val rule = Rule(name = "Rule")
+        val tag = Tag(name = "FOO")
         ruleFilterDao.updateRule(rule)
 
-        val bean = TagFilter(tags = listOf(Tag(name = "FOO")), ruleId = rule.id).toFilterBean()
+        val bean = TagFilter(tags = listOf(tag), ruleId = rule.id).toFilterBean()
         ruleFilterDao.updateFilterBean(bean)
 
-        val card1 = Card(tags = listOf(Tag(name = "FOO")))
+        val card1 = Card(tags = listOf(tag))
         val card2 = Card(tags = listOf(Tag(name = "BAR")))
 
         val rule1 = ruleFilterDao.getRules()[0].apply {
