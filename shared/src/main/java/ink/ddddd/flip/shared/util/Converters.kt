@@ -1,7 +1,9 @@
 package ink.ddddd.flip.shared.util
 
 import androidx.room.TypeConverter
+import ink.ddddd.flip.shared.filter.Filter
 import java.util.*
+import kotlin.reflect.KClass
 
 class Converters {
     @TypeConverter
@@ -12,5 +14,15 @@ class Converters {
     @TypeConverter
     fun dateToTimestamp(date: Date?): Long? {
         return date?.time
+    }
+
+    @TypeConverter
+    fun kClassToString(kClass: KClass<*>): String {
+        return kClass.qualifiedName!!
+    }
+
+    @TypeConverter
+    fun stringToKClass(string: String): KClass<*> {
+        return Class.forName(string).kotlin
     }
 }

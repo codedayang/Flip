@@ -2,6 +2,11 @@
 
 buildscript {
     ext {
+        //App Version
+        versionCode = 1
+        versionName = "0.1.0"
+
+
         activityVersion = "1.1.0"
         fragmentVersion = "1.2.4"
         cardviewVersion  = "1.0.0"
@@ -21,6 +26,7 @@ buildscript {
         daggerVersion = "2.25.4"
         lifecycleVersion = "2.2.0"
         roomVersion = "2.2.5"
+        gsonVersion = "2.8.6"
     }
     repositories {
         google()

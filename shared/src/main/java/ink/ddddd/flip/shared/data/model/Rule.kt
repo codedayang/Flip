@@ -1,0 +1,22 @@
+package ink.ddddd.flip.shared.data.model
+
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.Index
+import androidx.room.PrimaryKey
+import ink.ddddd.flip.shared.filter.Filter
+import java.util.*
+
+@Entity(tableName = "rule", indices = [Index("id", unique = true)])
+data class Rule(
+    @PrimaryKey var id: String = UUID.randomUUID().toString(),
+    var name: String = "",
+    @Ignore var filters: List<Filter> = emptyList()
+) {
+    fun check(card: Card): Boolean {
+        filters.forEach {
+            if (!it.check(card)) return false
+        }
+        return true
+    }
+}

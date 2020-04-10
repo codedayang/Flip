@@ -64,6 +64,9 @@ dependencies {
     //Timber
     implementation "com.jakewharton.timber:timber:$timberVersion"
 
+    //Gson
+    implementation "com.google.code.gson:gson:$gsonVersion"
+
     //Test
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$junitExtVersion"

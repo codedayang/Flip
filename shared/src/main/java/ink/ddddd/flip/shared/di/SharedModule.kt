@@ -14,4 +14,7 @@ object SharedModule{
 
     @Provides
     fun provideCardTagDao(appDatabase: AppDatabase) = appDatabase.cardTagDao()
+
+    @Provides
+    fun provideRuleFilterDao(appDatabase: AppDatabase) = appDatabase.ruleFilterDao()
 }
