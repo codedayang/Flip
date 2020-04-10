@@ -17,9 +17,9 @@ object WeightedRandomSample {
         var w_acc = 0.0
         for (sample in list) {
             if (heap.size < 1) {
-                val wi = sample.priority
+                val wi = sample.priority.toDouble()
                 val ui = Random.nextDouble(0.0, 1.0)
-                val ki = ui.pow(1/wi)
+                val ki = ui.pow(1.0/wi)
                 heap.offer(HeapPair(ki, sample))
                 continue
             }
@@ -39,8 +39,8 @@ object WeightedRandomSample {
             }
 
             val tw = Tw.pow(wi)
-            val r2 = Random.nextDouble(tw, 1.0)
-            val ki = r2.pow(1/wi)
+            val r2 = Random.nextDouble(tw-0.001, 1.0)
+            val ki = r2.pow(1.0/wi)
             heap.poll()
             heap.offer(HeapPair(ki, sample))
         }
