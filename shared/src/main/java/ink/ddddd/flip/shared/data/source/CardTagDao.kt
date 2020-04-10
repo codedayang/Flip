@@ -34,6 +34,9 @@ interface CardTagDao {
     @Delete
     fun deleteCard(card: Card)
 
+    @Query("DELETE FROM card_tag_join WHERE card_id = :cardId")
+    fun deleteJoinByCardId(cardId: String)
+
     @Delete
     fun deleteTag(tag: Tag)
 

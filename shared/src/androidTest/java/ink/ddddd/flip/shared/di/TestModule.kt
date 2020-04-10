@@ -11,16 +11,4 @@ import ink.ddddd.flip.shared.data.source.AppDatabase
 object TestModule {
     @Provides
     fun provideAppContext(): Context = InstrumentationRegistry.getInstrumentation().targetContext
-
-    @Provides
-    fun provideAppDatabase(context: Context) =
-        Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java)
-            .allowMainThreadQueries()
-            .build()
-
-    @Provides
-    fun provideCardTagDao(appDatabase: AppDatabase) = appDatabase.cardTagDao()
-
-    @Provides
-    fun provideRuleFilterDao(appDatabase: AppDatabase) = appDatabase.ruleFilterDao()
 }
