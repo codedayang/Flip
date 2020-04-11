@@ -34,6 +34,21 @@ class CardRepository @Inject constructor(
     }
 
     /**
+     * Get card list under [ruleSet]
+     */
+    fun getCards(ruleSet: RuleSet): List<Card> {
+        var cards = cardTagDao.getCards()
+        cards.forEach {
+            it.tags = cardTagDao.getTagsByCard(it.id)
+        }
+        cards = cards.filter {
+            ruleSet.check(it)
+        }
+        return cards
+    }
+
+
+    /**
      * Insert or update
      */
     fun updateCard(card: Card) {
