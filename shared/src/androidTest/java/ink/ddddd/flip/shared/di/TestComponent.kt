@@ -4,6 +4,7 @@ import dagger.Component
 import ink.ddddd.flip.shared.data.CardRepositoryTest
 import ink.ddddd.flip.shared.data.source.CardTagDaoTest
 import ink.ddddd.flip.shared.data.source.RuleFilterDaoTest
+import ink.ddddd.flip.shared.domain.rule.RuleUsecasesTest
 import javax.inject.Singleton
 
 @Singleton
@@ -12,4 +13,5 @@ interface TestComponent {
     fun inject(cardTagDaoTest: CardTagDaoTest)
     fun inject(ruleFilterDaoTest: RuleFilterDaoTest)
     fun inject(cardRepositoryTest: CardRepositoryTest)
+    fun inject(ruleUsecasesTest: RuleUsecasesTest)
 }

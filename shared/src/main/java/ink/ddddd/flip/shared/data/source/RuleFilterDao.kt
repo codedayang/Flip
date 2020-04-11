@@ -26,4 +26,7 @@ interface RuleFilterDao {
 
     @Delete
     fun deleteFilterBean(filterBean: FilterBean)
+
+    @Query("DELETE FROM filter_bean WHERE rule_id = :ruleId")
+    fun deleteFilterBeanByRule(ruleId: String)
 }
