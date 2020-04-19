@@ -4,9 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import timber.log.Timber
 import ink.ddddd.flip.shared.Result
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 /**
  * Executes business logic synchronously or asynchronously using a [Scheduler].
@@ -22,10 +20,13 @@ abstract class UseCase<in P, R> {
     operator fun invoke(scope : CoroutineScope, parameters: P, result: MutableLiveData<Result<R>>) {
         scope.launch {
             val job = async {
-                try {
-                    result.postValue(Result.Success(execute(parameters)))
-                } catch (e: Exception) {
-                    result.postValue(Result.Error(e))
+                withContext(Dispatchers.IO) {
+                    try {
+                        result.postValue(Result.Success(execute(parameters)))
+                    } catch (e: Exception) {
+                        result.postValue(Result.Error(e))
+                    }
+
                 }
             }
             job.await()
