@@ -55,11 +55,11 @@ class CardRepository @Inject constructor(
         if (cache.containsKey(card.id)) {
             cache[card.id] = card
         }
+        cardTagDao.updateCard(card)
         cardTagDao.deleteJoinByCardId(card.id)
         card.tags.forEach {
             cardTagDao.updateJoin(CardTagJoin(cardId = card.id, tagId = it.id))
         }
-        cardTagDao.updateCard(card)
     }
 
     fun deleteCard(card: Card) {
