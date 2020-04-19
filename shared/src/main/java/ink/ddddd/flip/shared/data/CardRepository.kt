@@ -13,7 +13,6 @@ import ink.ddddd.flip.shared.util.noRuleSet
 /**
     Cache card list under current [RuleSet] for continuously [GetNextCard] use case
  */
-@Singleton
 class CardRepository @Inject constructor(
     private val cardTagDao: CardTagDao
 ) {
