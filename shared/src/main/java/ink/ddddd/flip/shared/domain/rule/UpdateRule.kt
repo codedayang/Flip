@@ -12,7 +12,7 @@ class UpdateRule @Inject constructor(
         ruleFilterDao.deleteFilterBeanByRule(parameters.id)
         ruleFilterDao.updateRule(parameters)
         parameters.filters.forEach {
-            ruleFilterDao.updateFilterBean(it.toFilterBean())
+            ruleFilterDao.updateFilterBean(it.toFilterBean().apply { ruleId = parameters.id })
         }
     }
 
