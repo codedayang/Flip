@@ -11,10 +11,13 @@ import javax.inject.Singleton
 
 @Module
 object SharedModule{
+    /**
+     * allowMainThreadQueries for Test
+     */
     @Provides
     @Singleton
     fun provideAppDatabase(context: Context) =
-        Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
+        Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).allowMainThreadQueries().build()
 
     @Provides
     @Singleton

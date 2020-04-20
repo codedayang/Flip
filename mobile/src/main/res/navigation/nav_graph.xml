@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/performFragment"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/performFragment"
+        android:name="ink.ddddd.flip.perform.PerformFragment"
+        android:label="PerformFragment" />
+    <fragment
+        android:id="@+id/playgroundFragment"
+        android:name="ink.ddddd.flip.playground.PlaygroundFragment"
+        android:label="PlaygroundFragment" />
+</navigation>

@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="ink.ddddd.flip.perform.PerformViewModel" />
+
+        <import type="ink.ddddd.flip.perform.PerformViewModel" />
+
+    </data>
+
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/menu_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorSecondary">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:backgroundTint="@color/colorSecondary"
+                    app:ruleSet="@{viewmodel.ruleSet}">
+
+                </com.google.android.material.appbar.MaterialToolbar>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <ink.ddddd.topdrawerlayout.TopDrawerLayout
+                android:id="@+id/rule_select_drawer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toTopOf="@+id/filp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:visibleWhen="@{viewmodel.cardState == PerformViewModel.CARD_STATE_LOADING}" />
+
+                    <ink.ddddd.flip.widget.DoubleSideCardView
+                        android:id="@+id/card"
+                        android:layout_width="286dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toTopOf="@+id/filp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:showFront="@{viewmodel.cardState == PerformViewModel.CARD_STATE_FRONT}"
+                        app:visibleWhen="@{viewmodel.cardState == PerformViewModel.CARD_STATE_FRONT || viewmodel.cardState == PerformViewModel.CARD_STATE_BACK}">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="126dp"
+                            app:maxHeight="700dp">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/card_tag"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:layout_marginBottom="4dp"
+                                android:textSize="10sp"
+                                tools:text="TTAAGG"
+                                app:cardTags="@{viewmodel.card.tags}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent" />
+
+                            <ink.ddddd.flip.widget.MaxHeightScrollView
+                                android:id="@+id/front"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:minHeight="126dp"
+                                android:paddingBottom="20dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:maxHeight="700dp">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/front_card_front"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="42dp"
+                                        android:layout_marginEnd="42dp"
+                                        android:text="@{viewmodel.card.front}"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="16sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        tools:text="@string/app_name" />
+
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            </ink.ddddd.flip.widget.MaxHeightScrollView>
+
+
+                            <ink.ddddd.flip.widget.MaxHeightScrollView
+                                android:id="@+id/back"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:minHeight="126dp"
+                                android:paddingBottom="20dp"
+                                android:visibility="gone"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:maxHeight="700dp">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/back_card_front"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="12dp"
+                                        android:layout_marginTop="24dp"
+                                        android:fontFamily="sans-serif-light"
+                                        android:text="@{viewmodel.card.front}"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textSize="16sp"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintVertical_bias="0.1"
+                                        tools:text="@string/app_name" />
+
+                                    <View
+                                        android:id="@+id/divider"
+                                        android:layout_width="262dp"
+                                        android:layout_height="1dp"
+                                        android:layout_marginTop="8dp"
+                                        android:background="@color/colorDivider"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@id/back_card_front" />
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/back_card_back"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="12dp"
+                                        android:layout_marginTop="8dp"
+                                        android:text="@{viewmodel.card.back}"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textSize="18sp"
+                                        app:layout_constraintLeft_toLeftOf="parent"
+                                        app:layout_constraintTop_toBottomOf="@id/divider"
+                                        tools:text="@string/app_name" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                            </ink.ddddd.flip.widget.MaxHeightScrollView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </ink.ddddd.flip.widget.DoubleSideCardView>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/filp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="182dp"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:onClick="@{() -> viewmodel.flip()}"
+                        android:text="Flip"
+                        android:textColor="@color/colorTextOnPrimary"
+                        android:textSize="42sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.92"
+                        app:visibleWhen="@{viewmodel.cardState == PerformViewModel.CARD_STATE_FRONT}" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/positive_feedback"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="142dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:onClick="@{() -> viewmodel.feedback(1)}"
+                        android:text="Good"
+                        android:textColor="@color/colorTextOnPrimary"
+                        android:textSize="32sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/center_placeholder"
+
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.92"
+                        app:visibleWhen="@{viewmodel.cardState == PerformViewModel.CARD_STATE_BACK}" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/negative_feedback"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="142dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:onClick="@{() -> viewmodel.feedback(-1)}"
+                        android:text="Bad"
+                        android:textColor="@color/colorTextOnPrimary"
+                        android:textSize="32sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/center_placeholder"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.92"
+                        app:visibleWhen="@{viewmodel.cardState == PerformViewModel.CARD_STATE_BACK}" />
+
+                    <View
+                        android:id="@+id/center_placeholder"
+                        android:layout_width="1dp"
+                        android:layout_height="1dp"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.92" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <FrameLayout
+                    android:id="@+id/rule_select"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:background="@color/colorSecondary"
+                    android:minHeight="224dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:minHeight="224dp">
+
+                        <ProgressBar
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toTopOf="@id/apply"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/title"
+                            app:visibleWhen="@{viewmodel.ruleState == PerformViewModel.RULE_STATE_LOADING}" />
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="过滤规则选择"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textSize="24sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/chip_group"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="8dp"
+                            app:rules="@{viewmodel.rules}"
+                            app:visibleWhen="@{viewmodel.ruleState == PerformViewModel.RULE_STATE_SUCCESS}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/title" >
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/clear_rule"
+                                style="@style/Widget.MaterialComponents.Chip.Filter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="无过滤规则"/>
+
+                        </com.google.android.material.chip.ChipGroup>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/apply"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="应用"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/cancel"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="取消"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/apply" />
+
+                        <com.google.android.material.button.MaterialButtonToggleGroup
+                            android:id="@+id/mode_toggle"
+                            style="?attr/materialButtonToggleGroupStyle"
+                            app:singleSelection="true"
+                            app:checkedButton="@id/union"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginBottom="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <Button
+                                android:id="@+id/intersection"
+                                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:icon="@drawable/ic_intersection_24dp" />
+
+                            <Button
+                                android:id="@+id/union"
+                                style="@style/Widget.App.Button.OutlinedButton.IconOnly"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:icon="@drawable/ic_union_24dp" />
+                        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                        <ImageButton
+                            android:id="@+id/help"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:src="@drawable/ic_help_24dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/title"
+                            app:layout_constraintStart_toEndOf="@+id/title"
+                            app:layout_constraintTop_toTopOf="@+id/title" />
+
+                        <Button
+                            android:id="@+id/add"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="12dp"
+                            android:text="新增"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textSize="18sp"
+                            app:icon="@drawable/ic_add_24dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </FrameLayout>
+
+
+            </ink.ddddd.topdrawerlayout.TopDrawerLayout>
+
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/menu"
+            android:layout_width="224dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:background="@android:color/holo_blue_bright" />
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</layout>

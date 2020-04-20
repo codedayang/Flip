@@ -11,10 +11,11 @@ class GetNextCard @Inject constructor(
 ) : UseCase<Pair<RuleSet, Boolean>, Card>() {
 
     /**
-     * @param parameters pair's second item means whether to force refresh cache
+     * @param parameters pair's second item means whether to have a delay for a smooth animation
      */
     override fun execute(parameters: Pair<RuleSet, Boolean>): Card {
-        if (parameters.second) cardRepository.refreshCache(parameters.first)
+//        return Card(front = "Foo", back = "Bar")
+        if (parameters.second) Thread.sleep(130L)
         return cardRepository.getNextCard(parameters.first)
     }
 
