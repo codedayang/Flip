@@ -7,6 +7,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.textview.MaterialTextView
+import com.judemanutd.katexview.KatexView
 import ink.ddddd.flip.R
 import ink.ddddd.flip.shared.data.model.Rule
 import ink.ddddd.flip.shared.data.model.RuleSet
@@ -60,4 +61,9 @@ fun rules(chipGroup: ChipGroup, rules: List<Rule>?) {
         }
         chipGroup.addView(chip)
     }
+}
+
+@BindingAdapter("app:cardText")
+fun cardText(katexView: KatexView, text: String?) {
+    katexView.setText(text?:"")
 }

@@ -57,6 +57,7 @@ dependencies {
     implementation "com.google.android.material:material:$materialVersion"
     implementation "com.jaeger.statusbarutil:library:$statusBarUtilVersion"
     implementation "com.github.inkDDD:TopDrawerLayout:$topDrawerLayoutVersion"
+    implementation 'com.github.judemanutd:katexview:1.0.2'
 
     //Architecture Components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"

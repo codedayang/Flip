@@ -1,0 +1,6 @@
+When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\)
+and they are $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+
+$$ {n \brace k} = \frac{1}{k!}\sum_{j=0}^k (-1)^{k-j}\binom{k}{j}(k-j)^n $$
+
+中文测试
