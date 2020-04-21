@@ -1,21 +1,16 @@
 package ink.ddddd.flip.widget
 
 import android.content.Context
-import androidx.transition.TransitionManager
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import androidx.annotation.IntDef
-import com.bskim.maxheightscrollview.widgets.MaxHeightNestedScrollView
-import com.bskim.maxheightscrollview.widgets.MaxHeightScrollView
-import kotlin.annotation.Retention
+import androidx.transition.TransitionManager
 import com.google.android.material.card.MaterialCardView
 import ink.ddddd.flip.R
 import ink.ddddd.flip.util.anim.MEDIUM_COLLAPSE_DURATION
 import ink.ddddd.flip.util.anim.MEDIUM_EXPAND_DURATION
 import ink.ddddd.flip.util.anim.fadeThrough
-import kotlinx.android.synthetic.main.fragment_perform.view.*
 
 class DoubleSideCardView @JvmOverloads constructor(
     context: Context,
@@ -34,6 +29,16 @@ class DoubleSideCardView @JvmOverloads constructor(
         super.onFinishInflate()
         front = findViewById(R.id.front)
         back = findViewById(R.id.back)
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        //max height for perform scene
+        val maxHeight = display.height / 3 * 2
+        var h: Int = heightMeasureSpec
+        if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST) {
+            h = MeasureSpec.makeMeasureSpec(maxHeight, MeasureSpec.AT_MOST)
+        }
+        super.onMeasure(widthMeasureSpec, h)
     }
 
     fun setState(@State state: Int, animated: Boolean) {
