@@ -11,6 +11,7 @@ data class RuleSet(
     var rules: List<Rule>
 ) {
     fun check(card: Card): Boolean {
+        if (rules.isEmpty()) return true
         if (isUnion) {
             rules.forEach {
                 if (it.check(card)) return true
