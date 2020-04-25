@@ -1,6 +1,7 @@
 package ink.ddddd.flip.perform
 
 import android.view.LayoutInflater
+import androidx.core.view.forEach
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import com.google.android.material.appbar.MaterialToolbar
@@ -16,7 +17,7 @@ import ink.ddddd.flip.shared.filter.NoFilter
 import ink.ddddd.flip.shared.util.noRuleSet
 import kotlinx.android.synthetic.main.fragment_perform.view.*
 
-@BindingAdapter("app:cardTags")
+@BindingAdapter("cardTags")
 fun cardTags(textView: MaterialTextView, tags: List<Tag>?) {
     val sb = StringBuilder()
     tags?.forEach {
@@ -26,7 +27,7 @@ fun cardTags(textView: MaterialTextView, tags: List<Tag>?) {
 
 }
 
-@BindingAdapter("app:ruleSet")
+@BindingAdapter("ruleSet")
 fun ruleSet(toolbar: MaterialToolbar, ruleSet: RuleSet) {
     val split = if (ruleSet.isUnion) "∪" else "∩"
     val title = StringBuilder()
@@ -45,8 +46,13 @@ fun ruleSet(toolbar: MaterialToolbar, ruleSet: RuleSet) {
     toolbar.title = title
 }
 
-@BindingAdapter("app:rules")
+@BindingAdapter("rules")
 fun rules(chipGroup: ChipGroup, rules: List<Rule>?) {
+    chipGroup.forEach {
+        if (it.id != R.id.clear_rule) {
+            chipGroup.removeView(it)
+        }
+    }
     val context = chipGroup.context
     rules?.forEach {
         val chip = LayoutInflater.from(context).inflate(R.layout.widget_rule_chip, null, false) as Chip
@@ -63,7 +69,7 @@ fun rules(chipGroup: ChipGroup, rules: List<Rule>?) {
     }
 }
 
-@BindingAdapter("app:cardText")
+@BindingAdapter("cardText")
 fun cardText(katexView: KatexView, text: String?) {
     katexView.setText(text?:"")
 }
