@@ -46,6 +46,12 @@ class CardRepository @Inject constructor(
         return cards
     }
 
+    fun getCardById(id: String): Card {
+        return cardTagDao.getCardById(id).apply {
+            tags = cardTagDao.getTagsByCard(id)
+        }
+    }
+
 
     /**
      * Insert or update

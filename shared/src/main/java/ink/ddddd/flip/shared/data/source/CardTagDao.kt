@@ -19,6 +19,9 @@ interface CardTagDao {
     """)
     fun getTagsByCard(id: String): List<Tag>
 
+    @Query("SELECT * FROM card WHERE id = :id")
+    fun getCardById(id: String): Card
+
     @Query(" SELECT * FROM card WHERE front LIKE :query OR back LIKE '%'+:query+'%'")
     fun searchCardContent(query: String): List<Card>
 
