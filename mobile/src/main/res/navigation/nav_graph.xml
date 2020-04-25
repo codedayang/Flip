@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/performFragment"
+    app:startDestination="@id/tempFragment"
     tools:ignore="UnusedNavigation">
 
     <fragment
@@ -11,7 +11,33 @@
         android:name="ink.ddddd.flip.perform.PerformFragment"
         android:label="PerformFragment" />
     <fragment
-        android:id="@+id/playgroundFragment"
-        android:name="ink.ddddd.flip.playground.PlaygroundFragment"
-        android:label="PlaygroundFragment" />
+        android:id="@+id/cardEditFragment"
+        android:name="ink.ddddd.flip.cardedit.CardEditFragment"
+        android:label="CardEditFragment" >
+        <argument
+            android:name="cardId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_cardEditFragment_to_tagEditFragment"
+            app:destination="@id/tagEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tempFragment"
+        android:name="ink.ddddd.flip.temp.TempFragment"
+        android:label="TempFragment" >
+        <action
+            android:id="@+id/action_tempFragment_to_cardEditFragment"
+            app:destination="@id/cardEditFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_tempFragment_to_performFragment"
+            app:destination="@id/performFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tagEditFragment"
+        android:name="ink.ddddd.flip.tagedit.TagEditFragment"
+        android:label="TagEditFragment" />
 </navigation>

@@ -18,5 +18,10 @@
         <item name="android:minHeight">48dp</item>
     </style>
 
+    <style name="Widget.App.Chip.Tag" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="closeIconEnabled">true</item>
+        <item name="android:checkable">false</item>
+    </style>
+
 
 </resources>

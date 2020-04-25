@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewmodel"
+            type="ink.ddddd.flip.cardedit.CardEditViewModel" />
+        <import type="ink.ddddd.flip.cardedit.CardEditViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ink.ddddd.flip.widget.DoubleSideCardView
+            android:id="@+id/card"
+            android:layout_width="286dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/filp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.59000003">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="126dp">
+
+                <ScrollView
+                    android:id="@+id/scroller"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/front"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center">
+
+                            <com.judemanutd.katexview.KatexView
+                                android:id="@+id/front_card_front"
+                                cardText="@{viewmodel.card.front}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="42dp"
+                                android:layout_marginEnd="42dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="@string/app_name" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/back"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <com.judemanutd.katexview.KatexView
+                                android:id="@+id/back_card_front"
+                                cardText="@{viewmodel.card.front}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="24dp"
+                                android:layout_marginEnd="12dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.01"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.1"
+                                tools:text="@string/app_name" />
+
+                            <View
+                                android:id="@+id/divider"
+                                android:layout_width="262dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="8dp"
+                                android:background="@color/colorDivider"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/back_card_front" />
+
+                            <com.judemanutd.katexview.KatexView
+                                android:id="@+id/back_card_back"
+                                cardText="@{viewmodel.card.back}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="12dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.01"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/divider"
+                                tools:text="@string/app_name" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </FrameLayout>
+
+
+                </ScrollView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/card_tag"
+                    cardTags="@{viewmodel.card.tags}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="TTAAGG" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ink.ddddd.flip.widget.DoubleSideCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/filp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="182dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="Flip"
+            android:textColor="@color/colorTextOnPrimary"
+            android:textSize="42sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.92" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

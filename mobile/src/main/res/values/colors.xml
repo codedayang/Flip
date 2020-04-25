@@ -17,6 +17,8 @@
     <color name="colorTextOnPrimary">#424242</color>
     <color name="colorTextOnSecondary">#fafafa</color>
 
+    <color name="colorTextHint">#c7c7c7</color>
+
     <color name="colorDivider">#6d6d6d</color>
 
 </resources>
