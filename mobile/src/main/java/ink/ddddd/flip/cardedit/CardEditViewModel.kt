@@ -92,6 +92,18 @@ class CardEditViewModel @Inject constructor(
         isFirstLoad = true
     }
 
+    fun discardChanges() {
+        discardTagChange()
+        discardPriorityChange()
+    }
+
+    private fun discardPriorityChange() {
+        val t = card.value!!
+        t.priority = originPriority
+        getCardResult.value = Result.Success(t)
+        updateCard(viewModelScope, t)
+    }
+
     fun discardTagChange() {
         val t = card.value!!
         t.tags = originTags

@@ -46,7 +46,7 @@ class CardEditFragment : DaggerFragment() {
                 }
                 .setNegativeButton("舍弃更改") {dialog, _ ->
                     dialog.dismiss()
-                    viewModel.discardTagChange()
+                    viewModel.discardChanges()
                     findNavController().popBackStack()
                 }
                 .setNeutralButton("取消") { dialog, _ ->
@@ -180,7 +180,7 @@ class CardEditFragment : DaggerFragment() {
                 }
                 .setNegativeButton("舍弃更改") {dialog, _ ->
                     dialog.dismiss()
-                    viewModel.discardTagChange()
+                    viewModel.discardChanges()
                     findNavController().popBackStack()
                 }
                 .setNeutralButton("取消") { dialog, _ ->
