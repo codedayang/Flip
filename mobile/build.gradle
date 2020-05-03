@@ -6,7 +6,7 @@ apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "ink.ddddd.flip"
@@ -57,7 +57,9 @@ dependencies {
     implementation "com.google.android.material:material:$materialVersion"
     implementation "com.jaeger.statusbarutil:library:$statusBarUtilVersion"
     implementation "com.github.inkDDD:TopDrawerLayout:$topDrawerLayoutVersion"
-    implementation 'com.github.judemanutd:katexview:1.0.2'
+    implementation "com.github.judemanutd:katexview:$katexviewVersion"
+    implementation "com.github.seven332:drawerlayout:$fullscreenDrawerLayoutVersion"
+    implementation "com.github.inkDDD:MaterialSpinner:$materialSpinnerVersion"
 
     //Architecture Components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
