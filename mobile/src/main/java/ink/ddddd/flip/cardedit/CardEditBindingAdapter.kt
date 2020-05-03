@@ -8,8 +8,8 @@ import com.google.android.material.chip.ChipGroup
 import ink.ddddd.flip.R
 import ink.ddddd.flip.shared.data.model.Tag
 
-@BindingAdapter("editTags")
-fun editTags(chipGroup: ChipGroup, tags: List<Tag>?) {
+@BindingAdapter(value = ["editTags", "viewModel"], requireAll = true)
+fun editTags(chipGroup: ChipGroup, tags: List<Tag>?, viewModel: CardEditViewModel) {
     val childCount = chipGroup.childCount
     for (index in 0 until childCount) {
         val child = chipGroup.getChildAt(index) ?: continue
@@ -30,6 +30,17 @@ fun editTags(chipGroup: ChipGroup, tags: List<Tag>?) {
         chip.text = tag.name
         chip.setOnCloseIconClickListener {
             chipGroup.removeView(it)
+            viewModel.changed = true
+
+            val cardTag = mutableListOf<Tag>()
+            chipGroup.forEach {chip ->
+                if (chip.id != R.id.edit_tag) {
+                    cardTag.add(it.tag as Tag)
+                }
+            }
+            val t = viewModel.card.value!!
+            t.tags = cardTag
+            viewModel.card.value = t
         }
         chipGroup.addView(chip)
 

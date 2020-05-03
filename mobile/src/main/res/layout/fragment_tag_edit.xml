@@ -4,10 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
-            name="cardEditVm"
-            type="ink.ddddd.flip.cardedit.CardEditViewModel" />
-
-        <variable
             name="tagEditVm"
             type="ink.ddddd.flip.tagedit.TagEditViewModel" />
 

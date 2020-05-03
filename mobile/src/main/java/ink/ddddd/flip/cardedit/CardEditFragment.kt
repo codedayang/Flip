@@ -8,7 +8,6 @@ import androidx.activity.addCallback
 import androidx.core.view.forEach
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -18,7 +17,6 @@ import dagger.android.support.DaggerFragment
 import ink.ddddd.flip.databinding.FragmentCardEditBinding
 import ink.ddddd.flip.shared.Event
 import ink.ddddd.flip.shared.EventObserver
-import ink.ddddd.flip.shared.Result
 import ink.ddddd.flip.shared.data.model.Tag
 import ink.ddddd.flip.tagedit.TagEditFragment
 import ink.ddddd.flip.widget.DoubleSideCardView
@@ -26,7 +24,8 @@ import ink.ddddd.flip.widget.ViewPagerAdapter
 import javax.inject.Inject
 
 class CardEditFragment : DaggerFragment() {
-    @Inject lateinit var factory: ViewModelProvider.Factory
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
 
     private val viewModel by viewModels<CardEditViewModel> { factory }
 
@@ -34,26 +33,16 @@ class CardEditFragment : DaggerFragment() {
 
     private val args: CardEditFragmentArgs by navArgs<CardEditFragmentArgs>()
 
+    private var firstLoadFront = true
+    private var firstLoadBack = true
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
-            val dialog = MaterialAlertDialogBuilder(context)
-                .setTitle("保存卡片？")
-                .setPositiveButton("保存卡片") {dialog, _ ->
-                    viewModel.save(true)
-                    dialog.dismiss()
-                }
-                .setNegativeButton("舍弃更改") {dialog, _ ->
-                    dialog.dismiss()
-                    viewModel.discardChanges()
-                    findNavController().popBackStack()
-                }
-                .setNeutralButton("取消") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .create()
-            if (viewModel.isChanged()) {
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            val dialog = CardEditConfirmDialogFactory.create(this@CardEditFragment, viewModel)
+            if (viewModel.changed) {
                 dialog.show()
             } else {
                 findNavController().popBackStack()
@@ -80,8 +69,6 @@ class CardEditFragment : DaggerFragment() {
             findNavController().popBackStack()
         })
 
-        viewModel.changed = false
-        viewModel.isFirstLoad = true
 
         binding.cardPreview.card.setState(DoubleSideCardView.STATE_FRONT, false)
         viewModel.previewState = CardEditViewModel.PREVIEW_STATE_FRONT
@@ -102,12 +89,12 @@ class CardEditFragment : DaggerFragment() {
 
     private fun setUpTagEditAction() {
         binding.cardEdit.editTag.setOnClickListener {
-            val frag = TagEditFragment()
-            frag.onDismiss = {
-                viewModel.loadCard(viewModel.card.value!!.id)
-            }
             if (viewModel.card.value == null) return@setOnClickListener
-            frag.curCard = viewModel.card.value!!
+            val frag = TagEditFragment(viewModel.card.value!!) {
+                val t = viewModel.card.value!!
+                t.tags = it;
+                viewModel.card.value = t
+            }
             frag.show(childFragmentManager, null)
         }
     }
@@ -119,7 +106,7 @@ class CardEditFragment : DaggerFragment() {
     }
 
     private fun setUpEvents() {
-        binding.modeToggle.addOnButtonCheckedListener { group, checkedId, isChecked ->
+        binding.modeToggle.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (checkedId == binding.combo.id) {
                 if (isChecked) {
                     binding.next.visibility = View.VISIBLE
@@ -144,15 +131,28 @@ class CardEditFragment : DaggerFragment() {
             viewModel.nextCard()
         }
 
+
         binding.cardEdit.editFrontInput.addTextChangedListener {
             val text = it.toString()
+            if (firstLoadFront) {
+                firstLoadFront = false
+            } else {
+                viewModel.changed = true
+            }
             binding.cardPreview.frontCardFront.setText(text)
             binding.cardPreview.backCardFront.setText(text)
+
         }
 
         binding.cardEdit.editBackInput.addTextChangedListener {
             val text = it.toString()
+            if (firstLoadBack) {
+                firstLoadBack = false
+            } else {
+                viewModel.changed = true
+            }
             binding.cardPreview.backCardBack.setText(text)
+
         }
 
 
@@ -167,35 +167,19 @@ class CardEditFragment : DaggerFragment() {
         }
         val t = viewModel.card.value!!
         t.tags = tags
-        viewModel.getCardResult.value = Result.Success(t)
+        viewModel.card.value = t
     }
 
     private fun setUpActionBar() {
         binding.toolbar.setNavigationOnClickListener {
-            val dialog = MaterialAlertDialogBuilder(context)
-                .setTitle("保存卡片？")
-                .setPositiveButton("保存卡片") {dialog, _ ->
-                    viewModel.save(true)
-                    dialog.dismiss()
-                }
-                .setNegativeButton("舍弃更改") {dialog, _ ->
-                    dialog.dismiss()
-                    viewModel.discardChanges()
-                    findNavController().popBackStack()
-                }
-                .setNeutralButton("取消") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .create()
-            if (viewModel.isChanged()) {
+            val dialog = CardEditConfirmDialogFactory.create(this@CardEditFragment, viewModel)
+            if (viewModel.changed) {
                 dialog.show()
             } else {
                 findNavController().popBackStack()
             }
         }
     }
-
-
 
     private fun setUpViewPager() {
         binding.pager.adapter = ViewPagerAdapter(
@@ -219,7 +203,6 @@ class CardEditFragment : DaggerFragment() {
     }
 
     private fun setUpDeleteAction() {
-        viewModel.changed = true
         val dialog = MaterialAlertDialogBuilder(context)
             .setTitle("删除卡片")
             .setPositiveButton("删除") { _, _ ->

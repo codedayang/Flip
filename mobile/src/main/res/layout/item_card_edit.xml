@@ -143,6 +143,7 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     editTags="@{viewmodel.card.tags}"
+                    viewModel="@{viewmodel}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

@@ -12,7 +12,7 @@ import ink.ddddd.flip.tagedit.TagEditModule
 @Module
 abstract class CardEditModule {
     @FragmentScope
-    @ContributesAndroidInjector(modules = [TagEditModule::class])
+    @ContributesAndroidInjector
     abstract fun cardEditFragment(): CardEditFragment
 
     @Binds

@@ -1,8 +1,6 @@
 package ink.ddddd.flip.tagedit
 
-import android.content.DialogInterface
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,35 +10,34 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.chip.Chip
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import dagger.android.support.DaggerDialogFragment
 import ink.ddddd.flip.R
-import ink.ddddd.flip.cardedit.CardEditViewModel
 import ink.ddddd.flip.databinding.FragmentTagEditBinding
-import ink.ddddd.flip.shared.Result
 import ink.ddddd.flip.shared.data.model.Card
 import ink.ddddd.flip.shared.data.model.Tag
 import javax.inject.Inject
 
-class TagEditFragment : DaggerDialogFragment() {
+class TagEditFragment(
+    private val card: Card,
+    private val onConfirm: (tags: List<Tag>) -> Unit
+) : DaggerDialogFragment() {
     @Inject
     lateinit var factory: ViewModelProvider.Factory
-
-    private val cardEditVm by viewModels<CardEditViewModel> { factory }
 
     private val tagEditVm by viewModels<TagEditViewModel> { factory }
 
     private lateinit var binding: FragmentTagEditBinding
 
-    var onDismiss : () -> Unit = {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_DeviceDefault_Light_Dialog_NoActionBar_MinWidth);
+        setStyle(
+            DialogFragment.STYLE_NO_TITLE,
+            android.R.style.Theme_DeviceDefault_Light_Dialog_NoActionBar_MinWidth
+        );
     }
-
-    var curCard: Card = Card()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,21 +45,14 @@ class TagEditFragment : DaggerDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTagEditBinding.inflate(inflater, container, false)
-        binding.cardEditVm = cardEditVm
         binding.tagEditVm = tagEditVm
         binding.lifecycleOwner = viewLifecycleOwner
-        tagEditVm.curCard = curCard
-        tagEditVm.loadTags()
+        tagEditVm.loadTags(card)
 
         setUpAddAction()
         setUpConfirmAction()
         setUpCancelAction()
         return binding.root
-    }
-
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        onDismiss()
     }
 
     private fun setUpCancelAction() {
@@ -80,12 +70,10 @@ class TagEditFragment : DaggerDialogFragment() {
                     tags.add(chip.tag as Tag)
                 }
             }
-            tagEditVm.updateCard(tags)
-//            curCard.tags = tags
-//            cardEditVm.tags.value = tags
-//            cardEditVm.loadCard(curCard.id)
+            onConfirm(tags)
             dismiss()
         }
+
     }
 
     private fun setUpAddAction() {
@@ -96,8 +84,12 @@ class TagEditFragment : DaggerDialogFragment() {
             .setTitle("新建Tag")
             .setPositiveButton("保存") { dialog, _ ->
                 val text = dialogView.findViewById<TextInputEditText>(R.id.tag_name).text
-                tagEditVm.addTag(text.toString())
-                dialog.dismiss()
+                if (text.isNullOrBlank()) {
+                    Snackbar.make(requireView(), "Tag不能为空！", Snackbar.LENGTH_SHORT).show()
+                } else {
+                    tagEditVm.addTag(text.toString())
+                    dialog.dismiss()
+                }
             }
             .setNegativeButton("取消") { dialog, _ ->
                 dialog.dismiss()

@@ -1,9 +1,6 @@
 package ink.ddddd.flip.cardedit
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import ink.ddddd.flip.shared.Event
 import ink.ddddd.flip.shared.Result
 import ink.ddddd.flip.shared.data.model.Card
@@ -27,37 +24,32 @@ class CardEditViewModel @Inject constructor(
 
     val finish = MutableLiveData<Event<Unit>>()
 
-    val card = Transformations.map(getCardResult) {
-        when (it) {
-            is Result.Success -> {
-                editState.value = EDIT_STATE_SUCCESS
-                if (isFirstLoad && it.data.front.isNotEmpty()) {
-                    originFront = it.data.front
-                    originBack = it.data.back
-                    originPriority = it.data.priority
-                    originTags = it.data.tags
-                    isFirstLoad = false
-                }
-                it.data
-            }
-            else -> {
-                editState.value = EDIT_STATE_FAILED
-                null
-            }
-        }
-    }
-    private var originFront = ""
-    private var originBack = ""
-    private var originPriority = 0
-    private var originTags = listOf<Tag>()
+
+    val card = MediatorLiveData<Card>()
+
+    var originCard = Card()
 
     var changed = false
-    var isFirstLoad = true
 
 
     val snackbar = MutableLiveData<Event<String>>()
 
     var previewState = PREVIEW_STATE_FRONT
+
+    init {
+        card.addSource(getCardResult) {
+            when (it) {
+                is Result.Success -> {
+                    card.value = it.data
+                    originCard = it.data
+                    editState.value = EDIT_STATE_SUCCESS
+                }
+                else -> {
+                    editState.value = EDIT_STATE_FAILED
+                }
+            }
+        }
+    }
 
     fun loadCard(cardId: String) {
         editState.value = EDIT_STATE_LOADING
@@ -65,11 +57,9 @@ class CardEditViewModel @Inject constructor(
     }
 
     fun delete() {
-        if (card.value != null) {
-            deleteCard(viewModelScope, card.value!!)
-            snackbar.value = Event("已删除")
-            finish.value = Event(Unit)
-        }
+        deleteCard(viewModelScope, card.value!!)
+        snackbar.value = Event("已删除")
+        finish.value = Event(Unit)
     }
 
     fun changePriority(delta: Int) {
@@ -80,35 +70,15 @@ class CardEditViewModel @Inject constructor(
             return
         }
         t.priority = priority
-        getCardResult.value = Result.Success(t)
+        card.value = t
         changed = true
     }
 
     fun nextCard() {
         if (!checkCard()) return
-        editState.value = EDIT_STATE_LOADING
         save(false)
-        getCardResult.value = Result.Success(Card())
-        isFirstLoad = true
-    }
-
-    fun discardChanges() {
-        discardTagChange()
-        discardPriorityChange()
-    }
-
-    private fun discardPriorityChange() {
-        val t = card.value!!
-        t.priority = originPriority
-        getCardResult.value = Result.Success(t)
-        updateCard(viewModelScope, t)
-    }
-
-    fun discardTagChange() {
-        val t = card.value!!
-        t.tags = originTags
-        getCardResult.value = Result.Success(t)
-        updateCard(viewModelScope, t)
+        card.value = Card()
+        changed = false
     }
 
     fun save(close: Boolean) {
@@ -120,16 +90,6 @@ class CardEditViewModel @Inject constructor(
         }
     }
 
-    fun isChanged(): Boolean {
-
-        Timber.d(originFront)
-
-        if (card.value?.front!!.contentEquals(originFront)
-            && card.value?.back!!.contentEquals(originBack)
-            && !changed
-        ) return false
-        return true
-    }
 
     private fun checkCard(): Boolean {
         if (card.value!!.front.isBlank()) {

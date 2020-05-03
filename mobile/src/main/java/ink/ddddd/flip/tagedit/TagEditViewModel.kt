@@ -12,9 +12,7 @@ import javax.inject.Inject
 
 class TagEditViewModel @Inject constructor(
     private val getTags: GetTags,
-    private val updateTag: UpdateTag,
-    private val getCardById: GetCardById,
-    private val updateCard: UpdateCard
+    private val updateTag: UpdateTag
 ) : ViewModel() {
 
     var curCard: Card = Card()
@@ -23,7 +21,7 @@ class TagEditViewModel @Inject constructor(
     val getTagsResult = MutableLiveData<Result<List<Tag>>>()
 
     val tags: LiveData<List<TagWrapper>> = Transformations.map(getTagsResult) {
-        var res: List<TagWrapper>? = null
+        val res: List<TagWrapper>?
         res = when (it) {
             is Result.Success -> {
                 state.value = STATE_TAG_EDIT_SUCCESS
@@ -45,19 +43,15 @@ class TagEditViewModel @Inject constructor(
 
     val state = MutableLiveData<Int>(STATE_TAG_EDIT_LOADING)
 
-    fun loadTags() {
+    fun loadTags(card: Card) {
         state.value = STATE_TAG_EDIT_LOADING
+        curCard = card
         getTags(viewModelScope, Unit, getTagsResult)
     }
 
     fun addTag(name: String) {
         updateTag(viewModelScope, Tag(name = name))
-        loadTags()
-    }
-
-    fun updateCard(tags: List<Tag>) {
-        curCard.tags = tags
-        updateCard(viewModelScope, curCard)
+        loadTags(curCard)
     }
 
     companion object {
