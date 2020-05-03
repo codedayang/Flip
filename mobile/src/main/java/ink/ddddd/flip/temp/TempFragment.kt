@@ -30,7 +30,8 @@ class TempFragment : DaggerFragment() {
 
 
     val tag1 = Tag(name = "Tag1")
-    val card = Card(front = "Front", back = "Bar", tags = listOf(tag1))
+    var card = Card(front = "Front", back = "Bar", tags = listOf(tag1))
+    var id = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,11 +46,23 @@ class TempFragment : DaggerFragment() {
 
     private fun setUpEvents() {
         binding.go.setOnClickListener {
-            val action = TempFragmentDirections.actionTempFragmentToCardEditFragment(card.id)
+            val action = TempFragmentDirections.actionTempFragmentToCardEditFragment(id)
             findNavController().navigate(action)
         }
         binding.populate.setOnClickListener {
             viewModel.inflate(tag1, card)
+            id = card.id
+            card = Card(front = "Front", back = "Bar", tags = listOf(tag1))
+        }
+
+        binding.toCardBrowser.setOnClickListener {
+            val action = TempFragmentDirections.actionTempFragmentToCardBrowseFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.toPerform.setOnClickListener {
+            val action = TempFragmentDirections.actionTempFragmentToPerformFragment()
+            findNavController().navigate(action)
         }
     }
 
