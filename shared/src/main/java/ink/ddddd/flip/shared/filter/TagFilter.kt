@@ -31,6 +31,17 @@ class TagFilter (
         }
     }
 
+    override fun toString(): String {
+        val sb = StringBuilder()
+        sb.append("包含Tag:")
+        tags.forEach {
+            sb.append(it.name + ", ")
+        }
+        sb.deleteCharAt(sb.lastIndex)
+        sb.deleteCharAt(sb.lastIndex)
+        return sb.toString()
+    }
+
     companion object {
         fun fromFilterBean(bean: FilterBean): TagFilter {
             val type: Type = object : TypeToken<List<Tag>>() {}.type

@@ -6,13 +6,13 @@ import ink.ddddd.flip.shared.data.model.Rule
 
 @Dao
 interface RuleFilterDao {
-    @Query("SELECT * FROM filter_bean")
+    @Query("SELECT * FROM filter_bean ORDER BY id")
     fun getFilterBeans(): List<FilterBean>
 
-    @Query("SELECT * FROM filter_bean WHERE rule_id = :ruleId")
+    @Query("SELECT * FROM filter_bean WHERE rule_id = :ruleId ORDER BY id")
     fun getFilterBeans(ruleId: String): List<FilterBean>
 
-    @Query("SELECT * FROM rule")
+    @Query("SELECT * FROM rule ORDER BY id")
     fun getRules(): List<Rule>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

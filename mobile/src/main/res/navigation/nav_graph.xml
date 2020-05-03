@@ -35,9 +35,20 @@
         <action
             android:id="@+id/action_tempFragment_to_performFragment"
             app:destination="@id/performFragment" />
+        <action
+            android:id="@+id/action_tempFragment_to_cardBrowseFragment"
+            app:destination="@id/cardBrowseFragment" />
     </fragment>
     <fragment
         android:id="@+id/tagEditFragment"
         android:name="ink.ddddd.flip.tagedit.TagEditFragment"
         android:label="TagEditFragment" />
+    <fragment
+        android:id="@+id/cardBrowseFragment"
+        android:name="ink.ddddd.flip.cardbrowse.CardBrowseFragment"
+        android:label="CardBrowseFragment" >
+        <action
+            android:id="@+id/action_cardBrowseFragment_to_cardEditFragment"
+            app:destination="@id/cardEditFragment" />
+    </fragment>
 </navigation>

@@ -4,6 +4,7 @@ import ink.ddddd.flip.shared.data.model.FilterBean
 import ink.ddddd.flip.shared.filter.Filter
 import ink.ddddd.flip.shared.filter.NoFilter
 import ink.ddddd.flip.shared.filter.TagFilter
+import kotlin.reflect.KClass
 
 object FilterFactory {
     fun get(bean: FilterBean): Filter {
@@ -13,6 +14,17 @@ object FilterFactory {
             }
             NoFilter::class -> {
                 NoFilter.fromFilterBean(bean)
+            }
+            else -> {
+                throw IllegalArgumentException()
+            }
+        }
+    }
+
+    fun get(klass: KClass<out Filter>): Filter {
+        return when (klass) {
+            TagFilter::class -> {
+                TagFilter(tags = listOf())
             }
             else -> {
                 throw IllegalArgumentException()

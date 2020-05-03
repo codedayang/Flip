@@ -9,6 +9,7 @@ import ink.ddddd.flip.shared.data.model.RuleSet
 import ink.ddddd.flip.shared.domain.card.GetNextCard
 import ink.ddddd.flip.shared.util.WeightedRandomSample
 import ink.ddddd.flip.shared.util.noRuleSet
+import java.util.*
 
 /**
     Cache card list under current [RuleSet] for continuously [GetNextCard] use case
@@ -20,6 +21,12 @@ class CardRepository @Inject constructor(
     private var curRuleSet: RuleSet = noRuleSet()
 
     private var cache = mutableMapOf<String, Card>()
+    
+    fun searchCard(query: String): List<Card> {
+        val cards = cardTagDao.searchCardContent("%${query}%")
+        cards.forEach { it.tags = cardTagDao.getTagsByCard(it.id) }
+        return cards
+    }
 
     /**
      * Get next card with Weight Random Sampling
@@ -57,6 +64,7 @@ class CardRepository @Inject constructor(
      * Insert or update
      */
     fun updateCard(card: Card) {
+        card.editTime = Date(System.currentTimeMillis())
         if (cache.containsKey(card.id)) {
             cache[card.id] = card
         }

@@ -39,7 +39,7 @@ abstract class UseCase<in P, R> {
      *
      * @param parameters the input parameters to run the use case with
      */
-    operator fun invoke(scope : CoroutineScope, parameters: P): LiveData<Result<R>> {
+    open operator fun invoke(scope : CoroutineScope, parameters: P): LiveData<Result<R>> {
         val liveCallback: MutableLiveData<Result<R>> = MutableLiveData()
         this(scope, parameters, liveCallback)
         return liveCallback
