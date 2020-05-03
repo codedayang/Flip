@@ -1,12 +1,16 @@
 package ink.ddddd.flip.perform
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
+import androidx.core.view.GravityCompat
 import androidx.core.view.forEach
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
@@ -42,6 +46,23 @@ class PerformFragment : DaggerFragment() {
         setUpRuleChipGroup()
 
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            when {
+                binding.menuDrawer.isDrawerOpen(GravityCompat.START) -> {
+                    binding.menuDrawer.closeDrawer(GravityCompat.START)
+                }
+                binding.ruleSelectDrawer.isDrawerOpen(Gravity.TOP) -> {
+                    binding.ruleSelectDrawer.closeDrawer(Gravity.TOP)
+                }
+                else -> {
+                    findNavController().popBackStack()
+                }
+            }
+        }
     }
 
     private fun setUpRuleChipGroup() {
