@@ -30,7 +30,7 @@ class DoubleSideCardView @JvmOverloads constructor(
         front = findViewById(R.id.front)
         back = findViewById(R.id.back)
     }
-
+    @Suppress("DEPRECATION")
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         //max height for perform scene
         val maxHeight = display.height / 3 * 2
