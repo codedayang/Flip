@@ -20,7 +20,7 @@ import ink.ddddd.flip.shared.data.model.Tag
 import javax.inject.Inject
 
 class TagEditFragment(
-    private val card: Card,
+    private val card: Card?,
     private val onConfirm: (tags: List<Tag>) -> Unit
 ) : DaggerDialogFragment() {
     @Inject

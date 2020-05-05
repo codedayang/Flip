@@ -15,7 +15,7 @@ class TagEditViewModel @Inject constructor(
     private val updateTag: UpdateTag
 ) : ViewModel() {
 
-    var curCard: Card = Card()
+    var curCard: Card? = null
 
 
     val getTagsResult = MutableLiveData<Result<List<Tag>>>()
@@ -26,10 +26,14 @@ class TagEditViewModel @Inject constructor(
             is Result.Success -> {
                 state.value = STATE_TAG_EDIT_SUCCESS
                 it.data.map {tag ->
-                    if (curCard.tags.contains(tag)) {
-                        TagWrapper(tag, true)
-                    } else {
+                    if (curCard == null) {
                         TagWrapper(tag, false)
+                    } else {
+                        if (curCard!!.tags.contains(tag)) {
+                            TagWrapper(tag, true)
+                        } else {
+                            TagWrapper(tag, false)
+                        }
                     }
                 }
             }
@@ -43,7 +47,7 @@ class TagEditViewModel @Inject constructor(
 
     val state = MutableLiveData<Int>(STATE_TAG_EDIT_LOADING)
 
-    fun loadTags(card: Card) {
+    fun loadTags(card: Card?) {
         state.value = STATE_TAG_EDIT_LOADING
         curCard = card
         getTags(viewModelScope, Unit, getTagsResult)
