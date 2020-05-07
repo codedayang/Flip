@@ -68,6 +68,7 @@ class CardBrowseFragment : DaggerFragment() {
 
         setUpToolBar()
         setUpList()
+        setUpNewCardButton()
 
         setUpDrawer()
 
@@ -77,6 +78,12 @@ class CardBrowseFragment : DaggerFragment() {
         viewModel.navigateToEditor.observe(viewLifecycleOwner, EventObserver {
             navigateToEditor(it)
         })
+    }
+
+    private fun setUpNewCardButton() {
+        binding.newCard.setOnClickListener {
+            navigateToEditor("")
+        }
     }
 
     override fun onResume() {

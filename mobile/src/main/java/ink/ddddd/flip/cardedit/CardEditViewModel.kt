@@ -3,6 +3,7 @@ package ink.ddddd.flip.cardedit
 import androidx.lifecycle.*
 import ink.ddddd.flip.shared.Event
 import ink.ddddd.flip.shared.Result
+import ink.ddddd.flip.shared.data.NoSuchCardException
 import ink.ddddd.flip.shared.data.model.Card
 import ink.ddddd.flip.shared.data.model.Tag
 import ink.ddddd.flip.shared.domain.card.DeleteCard
@@ -43,6 +44,13 @@ class CardEditViewModel @Inject constructor(
                     card.value = it.data
                     originCard = it.data
                     editState.value = EDIT_STATE_SUCCESS
+                }
+                is Result.Error -> {
+                    if (it.exception is NoSuchCardException) {
+                        card.value = Card()
+                        originCard = card.value!!
+                        editState.value = EDIT_STATE_SUCCESS
+                    }
                 }
                 else -> {
                     editState.value = EDIT_STATE_FAILED
