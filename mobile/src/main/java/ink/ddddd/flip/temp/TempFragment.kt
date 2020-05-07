@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -39,6 +40,10 @@ class TempFragment : DaggerFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTempBinding.inflate(inflater, container, false)
+        binding.viewmodel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        viewModel.card.observe(viewLifecycleOwner, Observer {  })
         setUpSnackBar()
         setUpEvents()
         return binding.root
