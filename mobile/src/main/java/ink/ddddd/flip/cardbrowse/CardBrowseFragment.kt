@@ -242,6 +242,10 @@ class CardBrowseFragment : DaggerFragment() {
             }
         }
 
+        binding.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
     }
 
     private fun bindExistRuleChips(rules: List<Rule>?, chipGroup: ChipGroup) {
