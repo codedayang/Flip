@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="rule"
+            type="ink.ddddd.flip.shared.data.model.Rule" />
+
+        <variable
+            name="actionHandler"
+            type="ink.ddddd.flip.rulebrowse.RuleBrowseActionHandler" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp"
+        android:onClick="@{() -> actionHandler.openRuleEditor(rule)}"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:text="@{rule.name}"
+            tools:text="过滤规则1" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:text="@{rule.toString()}"
+            tools:text="包括TAG: TAG1, TAAAAG\n包括关键词: 化学\n卡片编辑时间区段: 2020/1/20 00:00 ~ 2020/3/14 23:59" />
+
+    </LinearLayout>
+</layout>

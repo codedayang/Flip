@@ -19,4 +19,15 @@ data class Rule(
         }
         return true
     }
+
+    override fun toString(): String {
+        val sb = StringBuilder()
+        filters.forEach {
+            sb.append(it)
+            if (filters.indexOf(it) != filters.size-1) {
+                sb.append("\n")
+            }
+        }
+        return sb.toString()
+    }
 }

@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_tempFragment_to_cardBrowseFragment"
             app:destination="@id/cardBrowseFragment" />
+        <action
+            android:id="@+id/action_tempFragment_to_ruleBrowseFragment"
+            app:destination="@id/ruleBrowseFragment" />
     </fragment>
     <fragment
         android:id="@+id/tagEditFragment"
@@ -51,4 +54,8 @@
             android:id="@+id/action_cardBrowseFragment_to_cardEditFragment"
             app:destination="@id/cardEditFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/ruleBrowseFragment"
+        android:name="ink.ddddd.flip.rulebrowse.RuleBrowseFragment"
+        android:label="RuleBrowseFragment" />
 </navigation>
