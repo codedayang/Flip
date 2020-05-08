@@ -13,10 +13,10 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/to_rule_browser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="query an invalid card"
-            android:onClick="@{() -> viewmodel.queryInvalidCard()}"
+            android:text="to rule browser"
             app:layout_constraintBottom_toTopOf="@+id/populate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
