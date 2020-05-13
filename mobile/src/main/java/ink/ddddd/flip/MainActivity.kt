@@ -10,7 +10,8 @@ import ink.ddddd.flip.util.DisplayUtils
 class MainActivity : DaggerAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DisplayUtils.setCustomDensity(this, application)
+        //TODO:屏幕适配
+//        DisplayUtils.setCustomDensity(this, application)
         setContentView(R.layout.activity_main)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         StatusBarUtil.setColor(
