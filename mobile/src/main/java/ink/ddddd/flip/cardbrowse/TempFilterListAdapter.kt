@@ -29,8 +29,8 @@ class TempFilterViewHolder(
     private val viewModel: CardBrowseViewModel
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(filter: Filter) {
-        binding.text.text = filter.toString()
-        binding.delete.setOnClickListener {
+        binding.chip.text = filter.toString()
+        binding.chip.setOnCloseIconClickListener {
             val position = adapterPosition
             viewModel.tempRuleFilters.remove(filter)
             viewModel.refreshTempRuleFilter.value = Event(Unit)

@@ -179,7 +179,7 @@ class CardBrowseFragment : DaggerFragment() {
         binding.cardBrowseDrawer.tempSetFilters.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = TempFilterListAdapter(viewModel)
-            addItemDecoration(SpacesItemDecoration(12))
+//            addItemDecoration(SpacesItemDecoration(2))
         }
         binding.cardBrowseDrawer.tempSetClear.setOnClickListener {
             val size = viewModel.tempRuleFilters.size
