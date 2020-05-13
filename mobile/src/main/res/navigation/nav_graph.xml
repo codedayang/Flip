@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_tempFragment_to_ruleBrowseFragment"
             app:destination="@id/ruleBrowseFragment" />
+        <action
+            android:id="@+id/action_tempFragment_to_ruleEditFragment"
+            app:destination="@id/ruleEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/tagEditFragment"
@@ -57,5 +60,17 @@
     <fragment
         android:id="@+id/ruleBrowseFragment"
         android:name="ink.ddddd.flip.rulebrowse.RuleBrowseFragment"
-        android:label="RuleBrowseFragment" />
+        android:label="RuleBrowseFragment" >
+        <action
+            android:id="@+id/action_ruleBrowseFragment_to_ruleEditFragment"
+            app:destination="@id/ruleEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ruleEditFragment"
+        android:name="ink.ddddd.flip.ruleedit.RuleEditFragment"
+        android:label="RuleEditFragment" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
 </navigation>

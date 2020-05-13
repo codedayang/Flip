@@ -15,6 +15,9 @@ interface RuleFilterDao {
     @Query("SELECT * FROM rule ORDER BY id")
     fun getRules(): List<Rule>
 
+    @Query("SELECT * FROM rule WHERE id = :id")
+    fun getRuleById(id: String): Rule
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun updateFilterBean(filterBean: FilterBean)
 
