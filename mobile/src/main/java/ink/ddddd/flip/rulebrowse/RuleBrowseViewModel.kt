@@ -1,6 +1,7 @@
 package ink.ddddd.flip.rulebrowse
 
 import androidx.lifecycle.*
+import ink.ddddd.flip.shared.Event
 import ink.ddddd.flip.shared.Result
 import ink.ddddd.flip.shared.data.model.Rule
 import ink.ddddd.flip.shared.data.model.Tag
@@ -27,12 +28,18 @@ class RuleBrowseViewModel @Inject constructor(
             }
         }
     }
+
+    val navigateToEditor = MutableLiveData<Event<String>>()
     init {
         getRules(viewModelScope, Unit, getRulesResult)
 //        rules.value = listOf(Rule(name = "Test", filters = listOf(TagFilter(tags = listOf(Tag(name = "Bar"))))))
     }
     override fun openRuleEditor(rule: Rule) {
-//        TODO("not implemented")
+        navigateToEditor.value = Event(rule.id)
+    }
+
+    fun refresh() {
+        getRules(viewModelScope, Unit, getRulesResult)
     }
 
     companion object {

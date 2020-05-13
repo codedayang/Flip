@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerFragment
 import ink.ddddd.flip.databinding.FragmentRuleBrowseBinding
+import ink.ddddd.flip.shared.EventObserver
 import ink.ddddd.flip.util.SpacesItemDecoration
 import timber.log.Timber
 import javax.inject.Inject
@@ -36,9 +37,24 @@ class RuleBrowseFragment : DaggerFragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.refresh()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpList()
         setUpToolbar()
+
+        viewModel.navigateToEditor.observe(viewLifecycleOwner, EventObserver {
+            val action = RuleBrowseFragmentDirections.actionRuleBrowseFragmentToRuleEditFragment(it)
+            findNavController().navigate(action)
+        })
+
+        binding.newRule.setOnClickListener {
+            val action = RuleBrowseFragmentDirections.actionRuleBrowseFragmentToRuleEditFragment("")
+            findNavController().navigate(action)
+        }
     }
 
     private fun setUpToolbar() {
