@@ -74,6 +74,11 @@ class TempFragment : DaggerFragment() {
             val action = TempFragmentDirections.actionTempFragmentToRuleBrowseFragment()
             findNavController().navigate(action)
         }
+
+        binding.toRuleEditor.setOnClickListener {
+//            val action = TempFragmentDirections.actionTempFragmentToRuleEditFragment()
+//            findNavController().navigate(action)
+        }
     }
 
     private fun setUpSnackBar() {
