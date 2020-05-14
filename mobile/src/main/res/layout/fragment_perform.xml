@@ -393,12 +393,12 @@
         </LinearLayout>
 
 
-        <View
+        <com.google.android.material.navigation.NavigationView
             android:id="@+id/menu"
             android:layout_width="224dp"
             android:layout_height="match_parent"
             android:layout_gravity="left"
-            android:background="@android:color/holo_blue_bright" />
+            app:menu="@menu/menu_perform_left_drawer" />
     </androidx.drawerlayout.widget.DrawerLayout>
 
 </layout>

@@ -44,8 +44,30 @@ class PerformFragment : DaggerFragment() {
         setUpViewModelEvent()
         setUpToolbar()
         setUpRuleChipGroup()
+        setUpLeftMenu()
+        setUpAddRuleAction()
 
         return binding.root
+    }
+
+    private fun setUpLeftMenu() {
+        binding.menu.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.to_card_browser -> {
+                    val action = PerformFragmentDirections.actionPerformFragmentToCardBrowseFragment()
+                    findNavController().navigate(action)
+                }
+                R.id.to_rule_browser -> {
+                    val action = PerformFragmentDirections.actionPerformFragmentToRuleBrowseFragment()
+                    findNavController().navigate(action)
+                }
+                R.id.to_tag_edit -> {
+                    val action = PerformFragmentDirections.actionPerformFragmentToTagBrowseFragment()
+                    findNavController().navigate(action)
+                }
+            }
+            false
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,10 +116,14 @@ class PerformFragment : DaggerFragment() {
             binding.ruleSelectDrawer.close()
         }
 
-        binding.add.setOnClickListener {
-            viewModel.snackbar.value = Event("TODO")
-        }
 
+    }
+
+    private fun setUpAddRuleAction() {
+        binding.add.setOnClickListener {
+            val action = PerformFragmentDirections.actionPerformFragmentToRuleEditFragment("")
+            findNavController().navigate(action)
+        }
     }
 
     private fun setUpViewModelEvent() {
@@ -122,7 +148,11 @@ class PerformFragment : DaggerFragment() {
         binding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.expand -> {
-                    openRuleSelect()
+                    if (binding.ruleSelectDrawer.isDrawerOpen(Gravity.TOP)) {
+                        closeRuleSelect()
+                    } else {
+                        openRuleSelect()
+                    }
                 }
             }
             true

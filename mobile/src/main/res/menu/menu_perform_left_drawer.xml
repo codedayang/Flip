@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/to_card_browser"
+        android:icon="@drawable/ic_list_24dp"
+        android:title="卡片管理"/>
+    <item
+        android:id="@+id/to_rule_browser"
+        android:icon="@drawable/ic_filter_list_24dp"
+        android:title="过滤规则管理"/>
+    <item
+        android:id="@+id/to_tag_edit"
+        android:icon="@drawable/ic_tags_24dp"
+        android:title="TAG管理"/>
+    <item
+        android:id="@+id/to_settings"
+        android:icon="@drawable/ic_settings_24dp"
+        android:title="全局设置"/>
+    <item
+        android:id="@+id/to_manual_guide"
+        android:icon="@drawable/ic_help_24dp"
+        android:title="查看帮助"/>
+
+</menu>
