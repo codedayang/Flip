@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import ink.ddddd.flip.cardbrowse.TempFilterListAdapter
@@ -67,11 +68,28 @@ class RuleEditFragment : DaggerFragment() {
         setUpToolbar()
         setUpSnackBar()
         setUpNameInput()
+        setUpDeleteAction()
         viewModel.tags.observe(viewLifecycleOwner, Observer {  })
         viewModel.loadRule(args.id)
         viewModel.close.observe(viewLifecycleOwner, EventObserver {
             findNavController().popBackStack()
         })
+    }
+
+    private fun setUpDeleteAction() {
+        val dialog = MaterialAlertDialogBuilder(context)
+            .setTitle("删除此规则？")
+            .setPositiveButton("删除") { dialog, which ->
+                viewModel.delete()
+                dialog.dismiss()
+            }
+            .setNegativeButton("取消") { dialog, which ->
+                dialog.dismiss()
+            }
+            .create()
+        binding.delete.setOnClickListener {
+            dialog.show()
+        }
     }
 
     private fun setUpNameInput() {

@@ -6,6 +6,7 @@ import ink.ddddd.flip.shared.Result
 import ink.ddddd.flip.shared.data.NoSuchRuleException
 import ink.ddddd.flip.shared.data.model.Rule
 import ink.ddddd.flip.shared.data.model.Tag
+import ink.ddddd.flip.shared.domain.rule.DeleteRule
 import ink.ddddd.flip.shared.domain.rule.GetRuleById
 import ink.ddddd.flip.shared.domain.rule.GetRules
 import ink.ddddd.flip.shared.domain.rule.UpdateRule
@@ -15,7 +16,8 @@ import javax.inject.Inject
 class RuleEditViewModel @Inject constructor(
     private val getRuleById: GetRuleById,
     private val getTags: GetTags,
-    private val updateRule: UpdateRule
+    private val updateRule: UpdateRule,
+    private val deleteRule: DeleteRule
 ) : ViewModel() {
     private val getRuleResult = MutableLiveData<Result<Rule>>()
 
@@ -80,6 +82,12 @@ class RuleEditViewModel @Inject constructor(
             snackbar.value = Event("保存成功")
             if (close) this.close.value = Event(Unit)
         }
+    }
+
+    fun delete() {
+        deleteRule(viewModelScope, rule.value!!)
+        snackbar.value = Event("已删除")
+        close.value = Event(Unit)
     }
 
     private fun validateRule(): Boolean {
