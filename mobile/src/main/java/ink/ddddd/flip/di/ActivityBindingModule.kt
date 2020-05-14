@@ -8,6 +8,7 @@ import ink.ddddd.flip.cardedit.CardEditModule
 import ink.ddddd.flip.perform.PerformModule
 import ink.ddddd.flip.rulebrowse.RuleBrowseModule
 import ink.ddddd.flip.ruleedit.RuleEditModule
+import ink.ddddd.flip.tagbrowse.TagBrowseModule
 import ink.ddddd.flip.tagedit.TagEditModule
 import ink.ddddd.flip.temp.TempModule
 
@@ -22,6 +23,7 @@ abstract class ActivityBindingModule {
             TagEditModule::class,
             RuleEditModule::class,
             RuleBrowseModule::class,
+            TagBrowseModule::class,
             TempModule::class]
     )
     abstract fun mainActivity(): MainActivity
