@@ -1,12 +1,9 @@
 package ink.ddddd.flip.cardbrowse
 
-import android.content.Context
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
 import androidx.core.view.GravityCompat
 import androidx.core.view.forEach
@@ -20,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import ink.ddddd.flip.R
@@ -32,11 +28,8 @@ import ink.ddddd.flip.shared.data.model.RuleSet
 import ink.ddddd.flip.shared.filter.FILTER_NAME
 import ink.ddddd.flip.shared.filter.Filter
 import ink.ddddd.flip.shared.filter.TagFilter
-import ink.ddddd.flip.temp.TempFragmentDirections
-import ink.ddddd.flip.util.SpacesItemDecoration
 import ink.ddddd.flip.util.anim.MEDIUM_EXPAND_DURATION
 import ink.ddddd.flip.util.anim.fadeThrough
-import kotlinx.android.synthetic.main.dialog_tag_filter_edit.*
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
@@ -73,7 +66,7 @@ class CardBrowseFragment : DaggerFragment() {
         setUpDrawer()
 
         //Empty observe to active data
-        viewModel.tags.observe(viewLifecycleOwner, Observer {  })
+        viewModel.tags.observe(viewLifecycleOwner, Observer { })
 
         viewModel.navigateToEditor.observe(viewLifecycleOwner, EventObserver {
             navigateToEditor(it)
@@ -215,7 +208,7 @@ class CardBrowseFragment : DaggerFragment() {
                     viewModel.tempRuleFilters.add(TagFilter(tags = it))
                     (binding.cardBrowseDrawer.tempSetFilters.adapter as TempFilterListAdapter).apply {
                         submitList(viewModel.tempRuleFilters)
-                        notifyItemInserted(viewModel.tempRuleFilters.size-1)
+                        notifyItemInserted(viewModel.tempRuleFilters.size - 1)
                     }
                 }.show()
             }
@@ -260,7 +253,8 @@ class CardBrowseFragment : DaggerFragment() {
 
         val context = chipGroup.context
         rules?.forEach {
-            val chip = LayoutInflater.from(context).inflate(R.layout.widget_rule_chip, null, false) as Chip
+            val chip =
+                LayoutInflater.from(context).inflate(R.layout.widget_rule_chip, null, false) as Chip
             chip.apply {
                 text = it.name
                 tag = it
