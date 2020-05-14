@@ -45,41 +45,46 @@ class TempFragment : DaggerFragment() {
 
         viewModel.card.observe(viewLifecycleOwner, Observer {  })
         setUpSnackBar()
-        setUpEvents()
+//        setUpEvents()
         return binding.root
     }
 
-    private fun setUpEvents() {
-        binding.go.setOnClickListener {
-            val action = TempFragmentDirections.actionTempFragmentToCardEditFragment(id)
-            findNavController().navigate(action)
-        }
-        binding.populate.setOnClickListener {
-            viewModel.inflate(tag1, card)
-            id = card.id
-            card = Card(front = "Front", back = "Bar", tags = listOf(tag1))
-        }
-
-        binding.toCardBrowser.setOnClickListener {
-            val action = TempFragmentDirections.actionTempFragmentToCardBrowseFragment()
-            findNavController().navigate(action)
-        }
-
-        binding.toPerform.setOnClickListener {
-            val action = TempFragmentDirections.actionTempFragmentToPerformFragment()
-            findNavController().navigate(action)
-        }
-
-        binding.toRuleBrowser.setOnClickListener {
-            val action = TempFragmentDirections.actionTempFragmentToRuleBrowseFragment()
-            findNavController().navigate(action)
-        }
-
-        binding.toRuleEditor.setOnClickListener {
-//            val action = TempFragmentDirections.actionTempFragmentToRuleEditFragment()
+//    private fun setUpEvents() {
+//        binding.go.setOnClickListener {
+//            val action = TempFragmentDirections.actionTempFragmentToCardEditFragment(id)
 //            findNavController().navigate(action)
-        }
-    }
+//        }
+//        binding.populate.setOnClickListener {
+//            viewModel.inflate(tag1, card)
+//            id = card.id
+//            card = Card(front = "Front", back = "Bar", tags = listOf(tag1))
+//        }
+//
+//        binding.toCardBrowser.setOnClickListener {
+//            val action = TempFragmentDirections.actionTempFragmentToCardBrowseFragment()
+//            findNavController().navigate(action)
+//        }
+//
+//        binding.toPerform.setOnClickListener {
+//            val action = TempFragmentDirections.actionTempFragmentToPerformFragment()
+//            findNavController().navigate(action)
+//        }
+//
+//        binding.toRuleBrowser.setOnClickListener {
+//            val action = TempFragmentDirections.actionTempFragmentToRuleBrowseFragment()
+//            findNavController().navigate(action)
+//        }
+//
+//        binding.toRuleEditor.setOnClickListener {
+////            val action = TempFragmentDirections.actionTempFragmentToRuleEditFragment()
+////            findNavController().navigate(action)
+//        }
+//
+//        binding.toTagBrowser.setOnClickListener {
+//            val action = TempFragmentDirections.actionTempFragmentToTagBrowseFragment()
+//            findNavController().navigate(action)
+//        }
+//    }
 
     private fun setUpSnackBar() {
         viewModel.snackbar.observe(viewLifecycleOwner, EventObserver {
