@@ -5,7 +5,7 @@
     <!-- Fade out, over a black surface, which simulates a black scrim -->
     <alpha
         android:fromAlpha="1"
-        android:toAlpha="0.4"
+        android:toAlpha="0"
         android:fillEnabled="true"
         android:fillBefore="true"
         android:fillAfter="true"
