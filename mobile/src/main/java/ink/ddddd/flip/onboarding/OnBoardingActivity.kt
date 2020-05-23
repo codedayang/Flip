@@ -55,12 +55,14 @@ class OnBoardingActivity : DaggerAppCompatActivity() {
                     TransitionManager.beginDelayedTransition(binding.root as ViewGroup, fade)
                     binding.importDemo.visibility = View.INVISIBLE
                     binding.importDemoIndicator.visibility = View.VISIBLE
+                    binding.importDemoSuccess.visibility = View.INVISIBLE
                 }
 
                 ImportDemoState.IMPORT_SUCCESS -> {
                     TransitionManager.beginDelayedTransition(binding.root as ViewGroup, fade)
                     binding.importDemoSuccess.visibility = View.VISIBLE
                     binding.importDemoIndicator.visibility = View.INVISIBLE
+                    binding.importDemoSuccess.visibility = View.VISIBLE
                 }
             }
         })
