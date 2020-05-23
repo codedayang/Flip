@@ -108,6 +108,7 @@ class PerformFragment : DaggerFragment() {
 
     override fun onResume() {
         super.onResume()
+        closeMenu()
         viewModel.loadRules()
         viewModel.loadCard()
     }
@@ -198,5 +199,9 @@ class PerformFragment : DaggerFragment() {
     fun closeRuleSelect() {
         binding.ruleSelectDrawer.close()
 
+    }
+
+    fun closeMenu() {
+        binding.menuDrawer.closeDrawer(GravityCompat.START, false)
     }
 }

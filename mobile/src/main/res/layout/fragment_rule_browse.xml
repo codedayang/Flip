@@ -10,7 +10,9 @@
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:elevation="8dp">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -36,7 +38,8 @@
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             rules="@{viewModel.rules}"
-            viewModel="@{viewModel}"/>
+            viewModel="@{viewModel}"
+            android:background="@android:color/white"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/new_rule"

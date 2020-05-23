@@ -12,16 +12,28 @@
         android:label="PerformFragment" >
         <action
             android:id="@+id/action_performFragment_to_ruleBrowseFragment"
-            app:destination="@id/ruleBrowseFragment" />
+            app:destination="@id/ruleBrowseFragment"
+            app:enterAnim="@anim/explode_in"
+            app:exitAnim="@anim/explode_in_exit"
+            app:popExitAnim="@anim/explode_out"
+            app:popEnterAnim="@anim/explode_out_enter"/>
         <action
             android:id="@+id/action_performFragment_to_cardBrowseFragment"
-            app:destination="@id/cardBrowseFragment" />
+            app:destination="@id/cardBrowseFragment"
+            app:enterAnim="@anim/explode_in"
+            app:exitAnim="@anim/explode_in_exit"
+            app:popExitAnim="@anim/explode_out"
+            app:popEnterAnim="@anim/explode_out_enter"/>
         <action
             android:id="@+id/action_performFragment_to_tagBrowseFragment"
             app:destination="@id/tagBrowseFragment" />
         <action
             android:id="@+id/action_performFragment_to_ruleEditFragment"
-            app:destination="@id/ruleEditFragment" />
+            app:destination="@id/ruleEditFragment"
+            app:enterAnim="@anim/explode_in"
+            app:exitAnim="@anim/explode_in_exit"
+            app:popExitAnim="@anim/explode_out"
+            app:popEnterAnim="@anim/explode_out_enter"/>
     </fragment>
     <fragment
         android:id="@+id/cardEditFragment"
@@ -44,15 +56,23 @@
         android:label="CardBrowseFragment" >
         <action
             android:id="@+id/action_cardBrowseFragment_to_cardEditFragment"
-            app:destination="@id/cardEditFragment" />
+            app:destination="@id/cardEditFragment"
+            app:enterAnim="@anim/explode_in"
+            app:exitAnim="@anim/explode_in_exit"
+            app:popExitAnim="@anim/explode_out"
+            app:popEnterAnim="@anim/explode_out_enter" />
     </fragment>
     <fragment
         android:id="@+id/ruleBrowseFragment"
         android:name="ink.ddddd.flip.rulebrowse.RuleBrowseFragment"
-        android:label="RuleBrowseFragment" >
+        android:label="RuleBrowseFragment">
         <action
             android:id="@+id/action_ruleBrowseFragment_to_ruleEditFragment"
-            app:destination="@id/ruleEditFragment" />
+            app:destination="@id/ruleEditFragment"
+            app:enterAnim="@anim/explode_in"
+            app:exitAnim="@anim/explode_in_exit"
+            app:popExitAnim="@anim/explode_out"
+            app:popEnterAnim="@anim/explode_out_enter"/>
     </fragment>
     <fragment
         android:id="@+id/ruleEditFragment"
