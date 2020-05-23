@@ -265,6 +265,7 @@
                         android:minHeight="224dp">
 
                         <ProgressBar
+                            android:id="@+id/progressBar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintBottom_toTopOf="@id/apply"
@@ -292,8 +293,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:layout_marginTop="8dp"
+                            android:layout_marginEnd="12dp"
+                            app:layout_constraintBottom_toTopOf="@id/mode_toggle"
+                            app:layout_constraintEnd_toStartOf="@+id/progressBar"
+                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/title"
+                            app:layout_constraintVertical_bias="0.0"
                             app:rules="@{viewmodel.rules}"
                             app:visibleWhen="@{viewmodel.ruleState == PerformViewModel.RULE_STATE_SUCCESS}">
 
