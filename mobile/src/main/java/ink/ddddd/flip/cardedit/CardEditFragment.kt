@@ -19,6 +19,7 @@ import ink.ddddd.flip.shared.Event
 import ink.ddddd.flip.shared.EventObserver
 import ink.ddddd.flip.shared.data.model.Tag
 import ink.ddddd.flip.tagedit.TagEditFragment
+import ink.ddddd.flip.util.hideKeyboardFrom
 import ink.ddddd.flip.widget.DoubleSideCardView
 import ink.ddddd.flip.widget.ViewPagerAdapter
 import javax.inject.Inject
@@ -124,6 +125,7 @@ class CardEditFragment : DaggerFragment() {
         binding.save.setOnClickListener {
             updateCardTag()
             viewModel.save(true)
+            hideKeyboardFrom(requireContext(), binding.root)
         }
 
         binding.next.setOnClickListener {

@@ -25,6 +25,7 @@ import ink.ddddd.flip.shared.filter.Filter
 import ink.ddddd.flip.shared.filter.TagFilter
 import ink.ddddd.flip.util.SpacesItemDecoration
 import ink.ddddd.flip.util.dip2px
+import ink.ddddd.flip.util.hideKeyboardFrom
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
@@ -72,6 +73,7 @@ class RuleEditFragment : DaggerFragment() {
         viewModel.tags.observe(viewLifecycleOwner, Observer {  })
         viewModel.loadRule(args.id)
         viewModel.close.observe(viewLifecycleOwner, EventObserver {
+            hideKeyboardFrom(requireContext(), binding.root)
             findNavController().popBackStack()
         })
     }
@@ -81,6 +83,7 @@ class RuleEditFragment : DaggerFragment() {
             .setTitle("删除此规则？")
             .setPositiveButton("删除") { dialog, which ->
                 viewModel.delete()
+                hideKeyboardFrom(requireContext(), binding.root)
                 dialog.dismiss()
             }
             .setNegativeButton("取消") { dialog, which ->
