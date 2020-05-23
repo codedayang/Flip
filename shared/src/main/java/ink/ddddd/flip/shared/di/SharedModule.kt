@@ -13,13 +13,10 @@ import javax.inject.Singleton
 
 @Module
 object SharedModule{
-    /**
-     * allowMainThreadQueries for Test
-     */
     @Provides
     @Singleton
     fun provideAppDatabase(context: Context) =
-        Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).allowMainThreadQueries().build()
+        Room.databaseBuilder(context, AppDatabase::class.java, "flip-db").build()
 
     @Provides
     @Singleton

@@ -26,12 +26,7 @@ import javax.inject.Inject
 class PerformViewModel @Inject constructor(
     private val getNextCard: GetNextCard,
     private val updateCard: UpdateCard,
-    private val updateTag: UpdateTag,
-    private val getTags: GetTags,
-    private val cardTagDao: CardTagDao,
-    private val ruleFilterDao: RuleFilterDao,
     private val getRules: GetRules,
-    private val updateRule: UpdateRule,
     private val ruleSelectHelperIsShown: RuleSelectHelperIsShown,
     private val ruleSelectHelperSetShown: RuleSelectHelperSetShown
 
@@ -84,23 +79,23 @@ class PerformViewModel @Inject constructor(
     init {
 
         // TestCode
-        runBlocking {
-            val tag1 = Tag(name = "BBBB")
-            updateTag.executeNow(tag1)
-            val tag2 = Tag(name = "AAA")
-            updateTag.executeNow(tag2)
-            updateCard.executeNow(Card(front = FORMULA, back = LONG_TEXT, tags = listOf(tag1)))
-            updateCard.executeNow(Card(front = "FooTag2", back = "FooTag2", tags = listOf(tag1,tag2)))
-
-            val tagFilter = TagFilter(tags = listOf(tag1))
-            val rule = Rule(name = "Tag:BBBB", filters = listOf(tagFilter))
-            updateRule.executeNow(rule)
-
-            val tagFilter2 = TagFilter(tags = listOf(tag2))
-            val rule2 = Rule(name = "Tag:AAA", filters = listOf(tagFilter2))
-            updateRule.executeNow(rule2)
-
-        }
+//        runBlocking {
+//            val tag1 = Tag(name = "BBBB")
+//            updateTag.executeNow(tag1)
+//            val tag2 = Tag(name = "AAA")
+//            updateTag.executeNow(tag2)
+//            updateCard.executeNow(Card(front = FORMULA, back = LONG_TEXT, tags = listOf(tag1)))
+//            updateCard.executeNow(Card(front = "FooTag2", back = "FooTag2", tags = listOf(tag1,tag2)))
+//
+//            val tagFilter = TagFilter(tags = listOf(tag1))
+//            val rule = Rule(name = "Tag:BBBB", filters = listOf(tagFilter))
+//            updateRule.executeNow(rule)
+//
+//            val tagFilter2 = TagFilter(tags = listOf(tag2))
+//            val rule2 = Rule(name = "Tag:AAA", filters = listOf(tagFilter2))
+//            updateRule.executeNow(rule2)
+//
+//        }
         getNextCard(viewModelScope, ruleSet.value!! to true, getNextCardResult)
         getRules(viewModelScope, Unit, getRulesResult)
 
