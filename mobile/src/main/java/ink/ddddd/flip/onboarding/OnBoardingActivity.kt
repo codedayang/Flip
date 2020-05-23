@@ -45,7 +45,7 @@ class OnBoardingActivity : DaggerAppCompatActivity() {
 
     private fun setUpEvents() {
         binding.toMainActivity.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java).apply { flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP  })
             finish()
         }
 

@@ -1,5 +1,6 @@
 package ink.ddddd.flip.perform
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import ink.ddddd.flip.R
 import ink.ddddd.flip.databinding.FragmentPerformBinding
+import ink.ddddd.flip.onboarding.OnBoardingActivity
 import ink.ddddd.flip.shared.Event
 import ink.ddddd.flip.shared.EventObserver
 import ink.ddddd.flip.shared.data.model.Rule
@@ -77,6 +79,12 @@ class PerformFragment : DaggerFragment() {
                     val action = PerformFragmentDirections.actionPerformFragmentToTagBrowseFragment()
                     findNavController().navigate(action)
                 }
+                R.id.to_settings -> {
+                    Snackbar.make(binding.root, "在路上了", Snackbar.LENGTH_SHORT).show()
+                }
+                R.id.to_manual_guide -> {
+                    startActivity(Intent(context, OnBoardingActivity::class.java))
+                }
             }
             false
         }
@@ -84,20 +92,18 @@ class PerformFragment : DaggerFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            ruleSelectHelperDialog.dismiss()
-            when {
-                binding.menuDrawer.isDrawerOpen(GravityCompat.START) -> {
-                    binding.menuDrawer.closeDrawer(GravityCompat.START)
-                }
-                binding.ruleSelectDrawer.isDrawerOpen(Gravity.TOP) -> {
-                    binding.ruleSelectDrawer.closeDrawer(Gravity.TOP)
-                }
-                else -> {
-                    activity?.finish()
-                }
-            }
-        }
+        //TODO: use default activity finish animation
+//        requireActivity().onBackPressedDispatcher.addCallback(this) {
+//            ruleSelectHelperDialog.dismiss()
+//            when {
+//                binding.menuDrawer.isDrawerOpen(GravityCompat.START) -> {
+//                    binding.menuDrawer.closeDrawer(GravityCompat.START)
+//                }
+//                binding.ruleSelectDrawer.isDrawerOpen(Gravity.TOP) -> {
+//                    binding.ruleSelectDrawer.closeDrawer(Gravity.TOP)
+//                }
+//            }
+//        }
     }
 
     override fun onResume() {
