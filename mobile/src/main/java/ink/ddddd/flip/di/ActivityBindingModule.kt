@@ -5,6 +5,10 @@ import dagger.android.ContributesAndroidInjector
 import ink.ddddd.flip.MainActivity
 import ink.ddddd.flip.cardbrowse.CardBrowseModule
 import ink.ddddd.flip.cardedit.CardEditModule
+import ink.ddddd.flip.launcher.LauncherActivity
+import ink.ddddd.flip.launcher.LauncherModule
+import ink.ddddd.flip.onboarding.OnBoardingActivity
+import ink.ddddd.flip.onboarding.OnBoardingModule
 import ink.ddddd.flip.perform.PerformModule
 import ink.ddddd.flip.rulebrowse.RuleBrowseModule
 import ink.ddddd.flip.ruleedit.RuleEditModule
@@ -27,4 +31,12 @@ abstract class ActivityBindingModule {
             TempModule::class]
     )
     abstract fun mainActivity(): MainActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [LauncherModule::class])
+    abstract fun launcherActivity(): LauncherActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [OnBoardingModule::class])
+    abstract fun onBoardingActivity(): OnBoardingActivity
 }
