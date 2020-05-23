@@ -12,6 +12,8 @@ import ink.ddddd.flip.shared.data.model.RuleSet
 import ink.ddddd.flip.shared.data.model.Tag
 import ink.ddddd.flip.shared.data.source.CardTagDao
 import ink.ddddd.flip.shared.data.source.RuleFilterDao
+import ink.ddddd.flip.shared.domain.pref.perform.RuleSelectHelperIsShown
+import ink.ddddd.flip.shared.domain.pref.perform.RuleSelectHelperSetShown
 import ink.ddddd.flip.shared.domain.rule.UpdateRule
 import ink.ddddd.flip.shared.domain.tag.GetTags
 import ink.ddddd.flip.shared.domain.tag.UpdateTag
@@ -29,7 +31,10 @@ class PerformViewModel @Inject constructor(
     private val cardTagDao: CardTagDao,
     private val ruleFilterDao: RuleFilterDao,
     private val getRules: GetRules,
-    private val updateRule: UpdateRule
+    private val updateRule: UpdateRule,
+    private val ruleSelectHelperIsShown: RuleSelectHelperIsShown,
+    private val ruleSelectHelperSetShown: RuleSelectHelperSetShown
+
 ) : ViewModel() {
 
     val cardState = MutableLiveData<Int>(CARD_STATE_LOADING)
@@ -73,6 +78,8 @@ class PerformViewModel @Inject constructor(
     val resetCardScroller = MutableLiveData<Event<Unit>>()
 
     val snackbar = MutableLiveData<Event<String>>()
+
+    val showRuleSelectHelper = MediatorLiveData<Event<Unit>>()
 
     init {
 
@@ -119,7 +126,7 @@ class PerformViewModel @Inject constructor(
         getRules(viewModelScope, Unit, getRulesResult)
     }
 
-    private fun loadCard() {
+    fun loadCard() {
         cardState.value = CARD_STATE_LOADING
         getNextCard(viewModelScope, ruleSet.value!! to true, getNextCardResult)
     }
@@ -127,6 +134,15 @@ class PerformViewModel @Inject constructor(
     fun applyRuleSet(ruleSet: RuleSet) {
         this.ruleSet.value = ruleSet
         loadCard()
+    }
+
+    fun shouldShowRuleSelectHelper() {
+        showRuleSelectHelper.addSource(ruleSelectHelperIsShown(viewModelScope, Unit)) {
+            if (!(it as? Result.Success)?.data!!) {
+                showRuleSelectHelper.value = Event(Unit)
+                ruleSelectHelperSetShown(viewModelScope, true)
+            }
+        }
     }
 
     companion object {

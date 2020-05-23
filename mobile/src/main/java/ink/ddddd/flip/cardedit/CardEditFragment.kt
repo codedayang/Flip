@@ -155,6 +155,14 @@ class CardEditFragment : DaggerFragment() {
 
         }
 
+        binding.help.setOnClickListener {
+            CardEditHelperDialog().show(parentFragmentManager, null)
+        }
+
+        viewModel.showHelperDialog.observe(viewLifecycleOwner, EventObserver {
+            CardEditHelperDialog().show(parentFragmentManager, null)
+        })
+
 
     }
 

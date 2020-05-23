@@ -10,6 +10,8 @@ import kotlin.reflect.KProperty
 
 interface PreferenceStorage {
     var onBoardingCompleted: Boolean
+    var cardEditHelperShown: Boolean
+    var ruleSelectHelperShown: Boolean
 }
 
 @Singleton
@@ -20,9 +22,15 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
 
     override var onBoardingCompleted by BooleanPreference(prefs, PREF_ONBOARDING, false)
 
+    override var cardEditHelperShown by BooleanPreference(prefs, PREF_CARD_EDIT_HELPER_SHOWN, false)
+
+    override var ruleSelectHelperShown: Boolean by BooleanPreference(prefs, PREF_RULE_SELECT_HELPER_SHOWN, false)
+
     companion object {
         const val PREF_NAME = "flip"
         const val PREF_ONBOARDING = "pref_onboarding"
+        const val PREF_CARD_EDIT_HELPER_SHOWN = "pref_card_edit_helper_shown"
+        const val PREF_RULE_SELECT_HELPER_SHOWN = "pref_rule_select_helper_shwon"
     }
 }
 

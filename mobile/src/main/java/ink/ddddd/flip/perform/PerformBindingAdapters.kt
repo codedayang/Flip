@@ -48,9 +48,11 @@ fun ruleSet(toolbar: MaterialToolbar, ruleSet: RuleSet) {
 
 @BindingAdapter("rules")
 fun rules(chipGroup: ChipGroup, rules: List<Rule>?) {
-    chipGroup.forEach {
-        if (it.id != R.id.clear_rule) {
-            chipGroup.removeView(it)
+    val childCount = chipGroup.childCount
+    for (index in 0 until childCount) {
+        val child = chipGroup.getChildAt(index) ?: continue
+        if (child.id != R.id.clear_rule) {
+            chipGroup.removeView(child)
         }
     }
     val context = chipGroup.context

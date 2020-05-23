@@ -9,13 +9,17 @@ import ink.ddddd.flip.shared.data.model.Tag
 import ink.ddddd.flip.shared.domain.card.DeleteCard
 import ink.ddddd.flip.shared.domain.card.GetCardById
 import ink.ddddd.flip.shared.domain.card.UpdateCard
+import ink.ddddd.flip.shared.domain.pref.cardedit.CardEditHelperIsShown
+import ink.ddddd.flip.shared.domain.pref.cardedit.CardEditHelperSetShown
 import timber.log.Timber
 import javax.inject.Inject
 
 class CardEditViewModel @Inject constructor(
     private val getCardById: GetCardById,
     private val updateCard: UpdateCard,
-    private val deleteCard: DeleteCard
+    private val deleteCard: DeleteCard,
+    private val cardEditHelperIsShown: CardEditHelperIsShown,
+    private val cardEditHelperSetShown: CardEditHelperSetShown
 ) : ViewModel() {
 
 
@@ -37,7 +41,15 @@ class CardEditViewModel @Inject constructor(
 
     var previewState = PREVIEW_STATE_FRONT
 
+    val showHelperDialog = MediatorLiveData<Event<Unit>>()
+
     init {
+        showHelperDialog.addSource(cardEditHelperIsShown(viewModelScope, Unit)) {
+            if (!(it as? Result.Success)?.data!!) {
+                showHelperDialog.value = Event(Unit)
+                cardEditHelperSetShown(viewModelScope, true)
+            }
+        }
         card.addSource(getCardResult) {
             when (it) {
                 is Result.Success -> {

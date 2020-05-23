@@ -32,6 +32,8 @@ class PerformFragment : DaggerFragment() {
 
     private var ruleSetModeIsUnion = true
 
+    private val ruleSelectHelperDialog by lazy { RuleSelectHelperDialog() }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,8 +48,18 @@ class PerformFragment : DaggerFragment() {
         setUpRuleChipGroup()
         setUpLeftMenu()
         setUpAddRuleAction()
+        setUpRuleSelectHelper()
 
         return binding.root
+    }
+
+    private fun setUpRuleSelectHelper() {
+        viewModel.showRuleSelectHelper.observe(viewLifecycleOwner, EventObserver {
+            ruleSelectHelperDialog.show(parentFragmentManager, null)
+        })
+        binding.help.setOnClickListener {
+            ruleSelectHelperDialog.show(parentFragmentManager, null)
+        }
     }
 
     private fun setUpLeftMenu() {
@@ -73,6 +85,7 @@ class PerformFragment : DaggerFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireActivity().onBackPressedDispatcher.addCallback(this) {
+            ruleSelectHelperDialog.dismiss()
             when {
                 binding.menuDrawer.isDrawerOpen(GravityCompat.START) -> {
                     binding.menuDrawer.closeDrawer(GravityCompat.START)
@@ -85,6 +98,12 @@ class PerformFragment : DaggerFragment() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadRules()
+        viewModel.loadCard()
     }
 
     private fun setUpRuleChipGroup() {
@@ -167,6 +186,7 @@ class PerformFragment : DaggerFragment() {
 
     fun openRuleSelect() {
         binding.ruleSelectDrawer.open()
+        viewModel.shouldShowRuleSelectHelper()
     }
 
     fun closeRuleSelect() {
