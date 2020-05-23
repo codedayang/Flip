@@ -81,7 +81,7 @@ class PerformFragment : DaggerFragment() {
                     binding.ruleSelectDrawer.closeDrawer(Gravity.TOP)
                 }
                 else -> {
-                    findNavController().popBackStack()
+                    activity?.finish()
                 }
             }
         }
