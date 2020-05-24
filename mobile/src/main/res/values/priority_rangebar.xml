@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="connecting_colors">
+        <item>#C1C1C1</item>
+        <item>#ACACAC</item>
+        <item>#979797</item>
+        <item>#838383</item>
+        <item>#6E6E6E</item>
+        <item>#595959</item>
+        <item>#444444</item>
+        <item>#303030</item>
+        <item>#1B1B1B</item>
+    </string-array>
+
+    <string-array name="tick_labels">
+        <item>清晰</item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item>模糊</item>
+    </string-array>
+</resources>

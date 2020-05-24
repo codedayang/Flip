@@ -65,6 +65,7 @@ dependencies {
     implementation "com.github.judemanutd:katexview:$katexviewVersion"
     implementation "com.github.seven332:drawerlayout:$fullscreenDrawerLayoutVersion"
     implementation "com.github.inkDDD:MaterialSpinner:$materialSpinnerVersion"
+    implementation "com.appyvet:materialrangebar:$materialrangebarVersion"
 
     //Architecture Components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"

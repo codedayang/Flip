@@ -1,9 +1,7 @@
 package cc.foxa.flip.shared.util
 
 import cc.foxa.flip.shared.data.model.FilterBean
-import cc.foxa.flip.shared.filter.Filter
-import cc.foxa.flip.shared.filter.NoFilter
-import cc.foxa.flip.shared.filter.TagFilter
+import cc.foxa.flip.shared.filter.*
 import kotlin.reflect.KClass
 
 object FilterFactory {
@@ -14,6 +12,15 @@ object FilterFactory {
             }
             NoFilter::class -> {
                 NoFilter.fromFilterBean(bean)
+            }
+            KeyWordFilter::class -> {
+                KeyWordFilter.fromFilterBean(bean)
+            }
+            PriorityFilter::class -> {
+                PriorityFilter.fromFilterBean(bean)
+            }
+            WithinDaysFilter::class -> {
+                WithinDaysFilter.fromFilterBean(bean)
             }
             else -> {
                 throw IllegalArgumentException()

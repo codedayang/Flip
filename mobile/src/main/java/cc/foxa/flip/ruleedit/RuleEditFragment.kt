@@ -17,12 +17,13 @@ import dagger.android.support.DaggerFragment
 import cc.foxa.flip.cardbrowse.TempFilterListAdapter
 import cc.foxa.flip.cardedit.CardEditFragmentArgs
 import cc.foxa.flip.databinding.FragmentRuleEditBinding
+import cc.foxa.flip.filteredit.KeyWordFilterEditDialog
+import cc.foxa.flip.filteredit.PriorityFilterEditDialog
 import cc.foxa.flip.filteredit.TagFilterEditDialogFactory
+import cc.foxa.flip.filteredit.WithinDaysFilterEditDialog
 import cc.foxa.flip.shared.Event
 import cc.foxa.flip.shared.EventObserver
-import cc.foxa.flip.shared.filter.FILTER_NAME
-import cc.foxa.flip.shared.filter.Filter
-import cc.foxa.flip.shared.filter.TagFilter
+import cc.foxa.flip.shared.filter.*
 import cc.foxa.flip.util.SpacesItemDecoration
 import cc.foxa.flip.util.dip2px
 import cc.foxa.flip.util.hideKeyboardFrom
@@ -158,9 +159,38 @@ class RuleEditFragment : DaggerFragment() {
                     (binding.filterList.adapter as FilterListAdapter).apply {
                         submitList(viewModel.rule.value!!.filters)
                         notifyDataSetChanged()
-//                        notifyItemInserted(viewModel.rule.value!!.filters.size-1)
                     }
                 }.show()
+            }
+            KeyWordFilter::class -> {
+                KeyWordFilterEditDialog() {
+                    viewModel.rule.value!!.filters += (KeyWordFilter(keyword = it))
+                    viewModel.changed = true
+                    (binding.filterList.adapter as FilterListAdapter).apply {
+                        submitList(viewModel.rule.value!!.filters)
+                        notifyDataSetChanged()
+                    }
+                }.show(parentFragmentManager, null)
+            }
+            PriorityFilter::class -> {
+                PriorityFilterEditDialog { from, to ->
+                    viewModel.rule.value!!.filters += (PriorityFilter(fromPriority = from, toPriority = to))
+                    viewModel.changed = true
+                    (binding.filterList.adapter as FilterListAdapter).apply {
+                        submitList(viewModel.rule.value!!.filters)
+                        notifyDataSetChanged()
+                    }
+                }.show(parentFragmentManager, null)
+            }
+            WithinDaysFilter::class -> {
+                WithinDaysFilterEditDialog { day ->
+                    viewModel.rule.value!!.filters += (WithinDaysFilter(days = day))
+                    viewModel.changed = true
+                    (binding.filterList.adapter as FilterListAdapter).apply {
+                        submitList(viewModel.rule.value!!.filters)
+                        notifyDataSetChanged()
+                    }
+                }.show(parentFragmentManager, null)
             }
         }
     }

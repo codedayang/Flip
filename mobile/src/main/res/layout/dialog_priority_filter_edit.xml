@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.appyvet.materialrangebar.RangeBar
+            android:id="@+id/range"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:mrb_barWeight="8dp"
+            app:mrb_connectingLineColors="@array/connecting_colors"
+            app:mrb_connectingLineWeight="12dp"
+            app:mrb_leftThumbColor="@color/colorPrimary"
+            app:mrb_pinColor="@color/colorPrimaryDark"
+            app:mrb_pinMaxFont="14sp"
+            app:mrb_rightThumbColor="@color/colorPrimary"
+            app:mrb_thumbSize="12dp"
+            app:mrb_tickEnd="10"
+            app:mrb_tickInterval="1"
+            app:mrb_tickStart="1"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="记住了"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/range"
+            app:layout_constraintTop_toBottomOf="@+id/range" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/range_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1~10"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/materialTextView10"
+            app:layout_constraintStart_toEndOf="@+id/materialTextView7"
+            app:layout_constraintTop_toBottomOf="@+id/range" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="不太会"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/range"
+            app:layout_constraintTop_toBottomOf="@+id/range" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -21,13 +21,15 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.android.support.DaggerFragment
 import cc.foxa.flip.R
 import cc.foxa.flip.databinding.FragmentCardBrowseBinding
+import cc.foxa.flip.filteredit.KeyWordFilterEditDialog
+import cc.foxa.flip.filteredit.PriorityFilterEditDialog
 import cc.foxa.flip.filteredit.TagFilterEditDialogFactory
+import cc.foxa.flip.filteredit.WithinDaysFilterEditDialog
+import cc.foxa.flip.ruleedit.FilterListAdapter
 import cc.foxa.flip.shared.EventObserver
 import cc.foxa.flip.shared.data.model.Rule
 import cc.foxa.flip.shared.data.model.RuleSet
-import cc.foxa.flip.shared.filter.FILTER_NAME
-import cc.foxa.flip.shared.filter.Filter
-import cc.foxa.flip.shared.filter.TagFilter
+import cc.foxa.flip.shared.filter.*
 import cc.foxa.flip.util.anim.MEDIUM_EXPAND_DURATION
 import cc.foxa.flip.util.anim.fadeThrough
 import javax.inject.Inject
@@ -211,6 +213,33 @@ class CardBrowseFragment : DaggerFragment() {
                         notifyItemInserted(viewModel.tempRuleFilters.size - 1)
                     }
                 }.show()
+            }
+            KeyWordFilter::class -> {
+                KeyWordFilterEditDialog() {
+                    viewModel.tempRuleFilters.add(KeyWordFilter(keyword = it))
+                    (binding.cardBrowseDrawer.tempSetFilters.adapter as TempFilterListAdapter).apply {
+                        submitList(viewModel.tempRuleFilters)
+                        notifyItemInserted(viewModel.tempRuleFilters.size - 1)
+                    }
+                }.show(parentFragmentManager, null)
+            }
+            PriorityFilter::class -> {
+                PriorityFilterEditDialog { from, to ->
+                    viewModel.tempRuleFilters.add(PriorityFilter(fromPriority = from, toPriority = to))
+                    (binding.cardBrowseDrawer.tempSetFilters.adapter as TempFilterListAdapter).apply {
+                        submitList(viewModel.tempRuleFilters)
+                        notifyItemInserted(viewModel.tempRuleFilters.size - 1)
+                    }
+                }.show(parentFragmentManager, null)
+            }
+            WithinDaysFilter::class -> {
+                WithinDaysFilterEditDialog { day ->
+                    viewModel.tempRuleFilters.add(WithinDaysFilter(days = day))
+                    (binding.cardBrowseDrawer.tempSetFilters.adapter as TempFilterListAdapter).apply {
+                        submitList(viewModel.tempRuleFilters)
+                        notifyItemInserted(viewModel.tempRuleFilters.size - 1)
+                    }
+                }.show(parentFragmentManager, null)
             }
         }
     }

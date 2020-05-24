@@ -35,6 +35,7 @@ buildscript {
         lifecycleVersion = "2.2.0"
         roomVersion = "2.2.5"
         gsonVersion = "2.8.6"
+        materialrangebarVersion = "1.4.8"
     }
     repositories {
         google()
