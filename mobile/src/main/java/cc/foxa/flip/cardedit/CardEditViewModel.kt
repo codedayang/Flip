@@ -85,7 +85,11 @@ class CardEditViewModel @Inject constructor(
         val t = card.value!!
         val priority = t.priority + delta
         if (priority < 1) {
-            snackbar.value = Event("优先级不可小于1")
+            snackbar.value = Event("权值不可小于1")
+            return
+        }
+        if ((priority > 10)) {
+            snackbar.value = Event("权值不可大于10")
             return
         }
         t.priority = priority

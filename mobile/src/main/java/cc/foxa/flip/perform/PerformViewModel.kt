@@ -106,7 +106,7 @@ class PerformViewModel @Inject constructor(
 
     fun feedback(priorityDelta: Int) {
         val t = card.value!!
-        t.priority = t.priority + priorityDelta
+        t.priority = (t.priority + priorityDelta).coerceIn(1..10)
         updateCard(viewModelScope, t)
         getNextCard(viewModelScope, ruleSet.value!! to true, getNextCardResult)
         cardState.value = CARD_STATE_LOADING
