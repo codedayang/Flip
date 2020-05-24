@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="ink.ddddd.flip.cardedit.CardEditViewModel" />
+            type="cc.foxa.flip.cardedit.CardEditViewModel" />
     </data>
 
     <LinearLayout

@@ -5,10 +5,10 @@
     <data>
         <variable
             name="tag"
-            type="ink.ddddd.flip.shared.data.model.Tag" />
+            type="cc.foxa.flip.shared.data.model.Tag" />
         <variable
             name="viewModel"
-            type="ink.ddddd.flip.tagbrowse.TagBrowseViewModel" />
+            type="cc.foxa.flip.tagbrowse.TagBrowseViewModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

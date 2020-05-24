@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/performFragment"
-        android:name="ink.ddddd.flip.perform.PerformFragment"
+        android:name="cc.foxa.flip.perform.PerformFragment"
         android:label="PerformFragment" >
         <action
             android:id="@+id/action_performFragment_to_ruleBrowseFragment"
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/cardEditFragment"
-        android:name="ink.ddddd.flip.cardedit.CardEditFragment"
+        android:name="cc.foxa.flip.cardedit.CardEditFragment"
         android:label="CardEditFragment" >
         <argument
             android:name="cardId"
@@ -48,11 +48,11 @@
     </fragment>
     <fragment
         android:id="@+id/tagEditFragment"
-        android:name="ink.ddddd.flip.tagedit.TagEditFragment"
+        android:name="cc.foxa.flip.tagedit.TagEditFragment"
         android:label="TagEditFragment" />
     <fragment
         android:id="@+id/cardBrowseFragment"
-        android:name="ink.ddddd.flip.cardbrowse.CardBrowseFragment"
+        android:name="cc.foxa.flip.cardbrowse.CardBrowseFragment"
         android:label="CardBrowseFragment" >
         <action
             android:id="@+id/action_cardBrowseFragment_to_cardEditFragment"
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/ruleBrowseFragment"
-        android:name="ink.ddddd.flip.rulebrowse.RuleBrowseFragment"
+        android:name="cc.foxa.flip.rulebrowse.RuleBrowseFragment"
         android:label="RuleBrowseFragment">
         <action
             android:id="@+id/action_ruleBrowseFragment_to_ruleEditFragment"
@@ -76,7 +76,7 @@
     </fragment>
     <fragment
         android:id="@+id/ruleEditFragment"
-        android:name="ink.ddddd.flip.ruleedit.RuleEditFragment"
+        android:name="cc.foxa.flip.ruleedit.RuleEditFragment"
         android:label="RuleEditFragment" >
         <argument
             android:name="id"
@@ -84,6 +84,6 @@
     </fragment>
     <dialog
         android:id="@+id/tagBrowseFragment"
-        android:name="ink.ddddd.flip.tagbrowse.TagBrowseFragment"
+        android:name="cc.foxa.flip.tagbrowse.TagBrowseFragment"
         android:label="TagBrowseFragment" />
 </navigation>

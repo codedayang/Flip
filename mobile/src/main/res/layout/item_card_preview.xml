@@ -7,8 +7,8 @@
     <data>
         <variable
             name="viewmodel"
-            type="ink.ddddd.flip.cardedit.CardEditViewModel" />
-        <import type="ink.ddddd.flip.cardedit.CardEditViewModel"/>
+            type="cc.foxa.flip.cardedit.CardEditViewModel" />
+        <import type="cc.foxa.flip.cardedit.CardEditViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ink.ddddd.flip.widget.DoubleSideCardView
+        <cc.foxa.flip.widget.DoubleSideCardView
             android:id="@+id/card"
             android:layout_width="286dp"
             android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </ink.ddddd.flip.widget.DoubleSideCardView>
+        </cc.foxa.flip.widget.DoubleSideCardView>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/filp"

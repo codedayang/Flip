@@ -7,9 +7,9 @@
 
         <variable
             name="viewmodel"
-            type="ink.ddddd.flip.perform.PerformViewModel" />
+            type="cc.foxa.flip.perform.PerformViewModel" />
 
-        <import type="ink.ddddd.flip.perform.PerformViewModel" />
+        <import type="cc.foxa.flip.perform.PerformViewModel" />
 
     </data>
 
@@ -58,7 +58,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:visibleWhen="@{viewmodel.cardState == PerformViewModel.CARD_STATE_LOADING}" />
 
-                    <ink.ddddd.flip.widget.DoubleSideCardView
+                    <cc.foxa.flip.widget.DoubleSideCardView
                         android:id="@+id/card"
                         android:layout_width="286dp"
                         android:layout_height="wrap_content"
@@ -180,7 +180,7 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                    </ink.ddddd.flip.widget.DoubleSideCardView>
+                    </cc.foxa.flip.widget.DoubleSideCardView>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/filp"

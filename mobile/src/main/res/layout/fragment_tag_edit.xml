@@ -5,9 +5,9 @@
     <data>
         <variable
             name="tagEditVm"
-            type="ink.ddddd.flip.tagedit.TagEditViewModel" />
+            type="cc.foxa.flip.tagedit.TagEditViewModel" />
 
-        <import type="ink.ddddd.flip.tagedit.TagEditViewModel"/>
+        <import type="cc.foxa.flip.tagedit.TagEditViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

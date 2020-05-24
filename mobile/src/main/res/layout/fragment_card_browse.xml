@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="ink.ddddd.flip.cardbrowse.CardBrowseViewModel" />
+            type="cc.foxa.flip.cardbrowse.CardBrowseViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

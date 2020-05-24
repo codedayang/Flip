@@ -5,8 +5,8 @@
     <data>
         <variable
             name="viewModel"
-            type="ink.ddddd.flip.tagbrowse.TagBrowseViewModel" />
-        <import type="ink.ddddd.flip.tagbrowse.TagBrowseViewModel"/>
+            type="cc.foxa.flip.tagbrowse.TagBrowseViewModel" />
+        <import type="cc.foxa.flip.tagbrowse.TagBrowseViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

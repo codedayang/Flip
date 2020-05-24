@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="ink.ddddd.flip.cardbrowse.CardBrowseViewModel" />
+            type="cc.foxa.flip.cardbrowse.CardBrowseViewModel" />
     </data>
     <LinearLayout
         android:orientation="vertical"

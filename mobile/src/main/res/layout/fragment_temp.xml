@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="ink.ddddd.flip.temp.TempViewModel" />
+            type="cc.foxa.flip.temp.TempViewModel" />
     </data>
 
 

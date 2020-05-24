@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="ink.ddddd.flip.rulebrowse.RuleBrowseViewModel" />
+            type="cc.foxa.flip.rulebrowse.RuleBrowseViewModel" />
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"

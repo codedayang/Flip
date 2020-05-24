@@ -5,11 +5,11 @@
     <data>
         <variable
             name="eventListener"
-            type="ink.ddddd.flip.cardbrowse.CardBrowseActionHandler" />
+            type="cc.foxa.flip.cardbrowse.CardBrowseActionHandler" />
 
         <variable
             name="card"
-            type="ink.ddddd.flip.shared.data.model.Card" />
+            type="cc.foxa.flip.shared.data.model.Card" />
     </data>
     
     <com.google.android.material.card.MaterialCardView

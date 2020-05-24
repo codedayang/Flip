@@ -5,9 +5,9 @@
     <data>
         <variable
             name="viewmodel"
-            type="ink.ddddd.flip.cardedit.CardEditViewModel" />
+            type="cc.foxa.flip.cardedit.CardEditViewModel" />
 
-        <import type="ink.ddddd.flip.cardedit.CardEditViewModel"/>
+        <import type="cc.foxa.flip.cardedit.CardEditViewModel"/>
     </data>
 
     <FrameLayout

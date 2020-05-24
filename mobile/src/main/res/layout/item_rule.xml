@@ -6,11 +6,11 @@
 
         <variable
             name="rule"
-            type="ink.ddddd.flip.shared.data.model.Rule" />
+            type="cc.foxa.flip.shared.data.model.Rule" />
 
         <variable
             name="actionHandler"
-            type="ink.ddddd.flip.rulebrowse.RuleBrowseActionHandler" />
+            type="cc.foxa.flip.rulebrowse.RuleBrowseActionHandler" />
     </data>
 
     <LinearLayout

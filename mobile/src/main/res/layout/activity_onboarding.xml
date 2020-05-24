@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="ink.ddddd.flip.onboarding.OnBoardingViewModel" />
+            type="cc.foxa.flip.onboarding.OnBoardingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
