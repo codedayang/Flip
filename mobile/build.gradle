@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "cc.foxa.flip"
-        minSdkVersion 23
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode rootProject.versionCode
         versionName rootProject.versionName
@@ -61,7 +61,7 @@ dependencies {
     implementation "androidx.drawerlayout:drawerlayout:$drawerLayoutVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "com.jaeger.statusbarutil:library:$statusBarUtilVersion"
-    implementation "com.github.inkDDD:TopDrawerLayout:$topDrawerLayoutVersion"
+    implementation "com.github.f0xa:TopDrawerLayout:$topDrawerLayoutVersion"
     implementation "com.github.judemanutd:katexview:$katexviewVersion"
     implementation "com.github.seven332:drawerlayout:$fullscreenDrawerLayoutVersion"
     implementation "com.github.inkDDD:MaterialSpinner:$materialSpinnerVersion"

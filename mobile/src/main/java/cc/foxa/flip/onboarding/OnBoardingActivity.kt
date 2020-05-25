@@ -1,6 +1,7 @@
 package cc.foxa.flip.onboarding
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -34,10 +35,14 @@ class OnBoardingActivity : DaggerAppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_onboarding)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-        StatusBarUtil.setColor(
-            this, resources.getColor(R.color.colorSecondary, theme), 0
-        )
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            StatusBarUtil.setColor(
+                this, resources.getColor(R.color.colorSecondary, theme), 0
+            )
+        }
+
 
         setUpEvents()
     }
