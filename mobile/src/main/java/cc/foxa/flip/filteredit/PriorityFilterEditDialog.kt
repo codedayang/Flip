@@ -33,10 +33,10 @@ class PriorityFilterEditDialog(
         return MaterialAlertDialogBuilder(context)
             .setTitle("权值范围")
             .setView(binding.root)
-            .setPositiveButton("确定") {dialog, which ->
+            .setPositiveButton("确定") { _, _ ->
                 onConfirm(binding.range.leftPinValue.toInt(), binding.range.rightPinValue.toInt())
             }
-            .setNegativeButton("取消") {dialog, which ->
+            .setNegativeButton("取消") { _, _ ->
 
             }
             .create()

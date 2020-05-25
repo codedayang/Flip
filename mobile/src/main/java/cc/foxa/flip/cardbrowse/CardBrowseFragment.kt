@@ -138,7 +138,7 @@ class CardBrowseFragment : DaggerFragment() {
             viewModel.applyRuleSet(RuleSet(isUnion = existRuleModeIsUnion, rules = rules))
             binding.drawer.closeDrawer(GravityCompat.END)
         }
-        binding.cardBrowseDrawer.existSetModeToggle.addOnButtonCheckedListener { group, checkedId, isChecked ->
+        binding.cardBrowseDrawer.existSetModeToggle.addOnButtonCheckedListener { _, checkedId, isChecked ->
             when (checkedId) {
                 binding.cardBrowseDrawer.existSetModeIntersection.id -> {
                     if (isChecked) existRuleModeIsUnion = false
@@ -167,7 +167,7 @@ class CardBrowseFragment : DaggerFragment() {
     private fun setUpTempRuleSection() {
         binding.cardBrowseDrawer.tempSetAddFilter.apply {
             setItems(FILTER_NAME.values.toList())
-            setOnItemSelectedListener { view, position, id, item ->
+            setOnItemSelectedListener { _, position, _, _ ->
                 showTempRuleAddFilterDialog(FILTER_NAME.keys.toList()[position])
             }
         }

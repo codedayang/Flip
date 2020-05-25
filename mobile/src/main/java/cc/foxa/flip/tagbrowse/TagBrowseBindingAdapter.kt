@@ -12,7 +12,7 @@ fun tags(chipGroup: ChipGroup, tags: List<Tag>?, viewModel: TagBrowseViewModel) 
         val chip = Chip(chipGroup.context)
         chip.tag = it
         chip.text = it.name
-        chip.setOnClickListener {view ->
+        chip.setOnClickListener {_ ->
             viewModel.showTagEditDialog(it)
         }
         chipGroup.addView(chip)

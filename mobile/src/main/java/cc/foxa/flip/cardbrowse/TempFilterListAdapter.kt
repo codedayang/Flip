@@ -31,7 +31,6 @@ class TempFilterViewHolder(
     fun bind(filter: Filter) {
         binding.chip.text = filter.toString()
         binding.chip.setOnCloseIconClickListener {
-            val position = adapterPosition
             viewModel.tempRuleFilters.remove(filter)
             viewModel.refreshTempRuleFilter.value = Event(Unit)
         }

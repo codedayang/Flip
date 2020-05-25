@@ -59,7 +59,7 @@ class TagBrowseFragment : DaggerDialogFragment() {
             val dialog = AlertDialog.Builder(requireContext())
                 .setView(dialogViewBinding.root)
                 .setTitle("编辑")
-                .setPositiveButton("保存") { dialog, which ->
+                .setPositiveButton("保存") { dialog, _ ->
                     if (dialogViewBinding.tagNameInput.text.isNullOrBlank()) {
                         Snackbar.make(requireView(), "Tag不能为空！", Snackbar.LENGTH_SHORT).show()
                     } else {
@@ -67,11 +67,11 @@ class TagBrowseFragment : DaggerDialogFragment() {
                         dialog.dismiss()
                     }
                 }
-                .setNegativeButton("取消") { dialog, which ->
+                .setNegativeButton("取消") { dialog, _ ->
                     dialog.dismiss()
                 }
                 .create()
-            dialogViewBinding.delete.setOnClickListener { view ->
+            dialogViewBinding.delete.setOnClickListener { _ ->
                 showDeleteConfirmDialog(it) {
                     dialog.dismiss()
                 }
@@ -86,12 +86,12 @@ class TagBrowseFragment : DaggerDialogFragment() {
     private fun showDeleteConfirmDialog(tag: Tag, onConfirm: () -> Unit) {
         val dialog = AlertDialog.Builder(requireContext())
             .setTitle("删除TAG: ${tag.name}？")
-            .setPositiveButton("删除") {dialog, which ->
+            .setPositiveButton("删除") { dialog, _ ->
                 viewModel.delete(tag)
                 onConfirm()
                 dialog.dismiss()
             }
-            .setNegativeButton("取消") { dialog, which ->
+            .setNegativeButton("取消") { dialog, _ ->
                 dialog.dismiss()
             }
         dialog.show()

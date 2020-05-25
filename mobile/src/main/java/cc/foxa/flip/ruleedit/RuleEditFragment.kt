@@ -82,12 +82,12 @@ class RuleEditFragment : DaggerFragment() {
     private fun setUpDeleteAction() {
         val dialog = MaterialAlertDialogBuilder(context)
             .setTitle("删除此规则？")
-            .setPositiveButton("删除") { dialog, which ->
+            .setPositiveButton("删除") { dialog, _ ->
                 viewModel.delete()
                 hideKeyboardFrom(requireContext(), binding.root)
                 dialog.dismiss()
             }
-            .setNegativeButton("取消") { dialog, which ->
+            .setNegativeButton("取消") { dialog, _ ->
                 dialog.dismiss()
             }
             .create()
@@ -144,7 +144,7 @@ class RuleEditFragment : DaggerFragment() {
     private fun setUpAddFilterSpinner() {
         binding.addFilter.apply {
             setItems(FILTER_NAME.values.toList())
-            setOnItemSelectedListener { view, position, id, item ->
+            setOnItemSelectedListener { _, position, _, _ ->
                 showAddFilterDialog(FILTER_NAME.keys.toList()[position])
             }
         }
