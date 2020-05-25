@@ -26,4 +26,4 @@ script:
 - "./gradlew assembleRelease"
 
 after_success:
-- fir p mobile/build/outputs/apk/release/mobile-release.apk -T $FIR_TOKEN -c $TRAVIS_COMMIT_MESSAGE
+- fir p mobile/build/outputs/apk/release/mobile-release.apk -T $FIR_TOKEN -c "`$TRAVIS_COMMIT_MESSAGE`"
