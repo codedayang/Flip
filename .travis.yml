@@ -14,11 +14,13 @@ cache:
     - $HOME/.android/build-cache
 before_script:
 - chmod +x gradlew
-- (echo y; echo y; echo y; echo y; echo y; echo y) | $ANDROID_HOME/tools/bin/sdkmanager --licenses
 before_install:
 - openssl aes-256-cbc -K $encrypted_04bcdd73bf31_key -iv $encrypted_04bcdd73bf31_iv
   -in Flip.jks.enc -out Flip.jks -d
 - gem install fir-cli
+- touch $HOME/.android/repositories.cfg
+- yes | sdkmanager "platforms;android-29"
+- yes | sdkmanager "build-tools;29.0.3"
 script:
 - "./gradlew assembleRelease"
 
