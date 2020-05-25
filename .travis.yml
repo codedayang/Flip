@@ -21,6 +21,7 @@ before_install:
 - touch $HOME/.android/repositories.cfg
 - yes | sdkmanager "platforms;android-29"
 - yes | sdkmanager "build-tools;29.0.3"
+- yes | sdkmanager "build-tools;29.0.2"
 script:
 - "./gradlew assembleRelease"
 
