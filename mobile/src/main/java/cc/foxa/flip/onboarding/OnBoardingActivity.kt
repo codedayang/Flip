@@ -16,6 +16,7 @@ import dagger.android.support.DaggerAppCompatActivity
 import cc.foxa.flip.MainActivity
 import cc.foxa.flip.R
 import cc.foxa.flip.databinding.ActivityOnboardingBinding
+import cc.foxa.flip.util.DisplayUtils
 import javax.inject.Inject
 
 class OnBoardingActivity : DaggerAppCompatActivity() {
@@ -32,6 +33,7 @@ class OnBoardingActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DisplayUtils.setCustomDensity(this, application)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_onboarding)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
@@ -45,6 +47,7 @@ class OnBoardingActivity : DaggerAppCompatActivity() {
 
 
         setUpEvents()
+        binding.importDemoIndicator.visibility = View.INVISIBLE
     }
 
     private fun setUpEvents() {
