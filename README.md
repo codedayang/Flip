@@ -1,4 +1,6 @@
-# Flip记忆卡片
+# Flip记忆卡片 
+
+[![Build Status](https://travis-ci.com/f0xa/Flip.svg?branch=master)](https://travis-ci.com/f0xa/Flip)
 
 一款帮您记住知识的APP
 
