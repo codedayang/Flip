@@ -15,8 +15,7 @@ cache:
 before_script:
 - chmod +x gradlew
 before_install:
-- yes | sdkmanager "platforms;android-29"
-- yes | sdkmanager "build-tools;29.0.3"
+- yes | sdkmanager --licenses
 - openssl aes-256-cbc -K $encrypted_04bcdd73bf31_key -iv $encrypted_04bcdd73bf31_iv
   -in Flip.jks.enc -out Flip.jks -d
 - gem install fir-cli
